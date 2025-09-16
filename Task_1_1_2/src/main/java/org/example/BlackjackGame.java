@@ -2,6 +2,9 @@ package org.example;
 
 import java.util.Scanner;
 
+/**
+ * The main class that orchestrates the Blackjack game logic.
+ */
 public class BlackjackGame {
 
     private final Deck deck;
@@ -9,6 +12,9 @@ public class BlackjackGame {
     private final Dealer dealer;
     private final Scanner scanner;
 
+    /**
+     * Constructs a new game instance, initializing all components.
+     */
     public BlackjackGame() {
         this.deck = new Deck();
         this.player = new Player("Player");
@@ -16,6 +22,9 @@ public class BlackjackGame {
         this.scanner = new Scanner(System.in);
     }
 
+    /**
+     * Starts and manages the main game loop, playing rounds until the user quits.
+     */
     public void playGame() {
         System.out.println("Welcome to Blackjack!");
 
@@ -30,6 +39,9 @@ public class BlackjackGame {
         System.out.println("Thanks for playing!");
     }
 
+    /**
+     * Manages the logic for a single round of Blackjack.
+     */
     private void playRound() {
         deck.shuffle();
         player.getHand().clear();
@@ -41,7 +53,8 @@ public class BlackjackGame {
         dealer.addCard(deck.dealCard());
 
         System.out.println("\n--- New Round ---");
-        System.out.println(player.getName() + "'s hand: " + player.getHand() + " (Score: " + player.getScore() + ")");
+        System.out.println(player.getName() + "'s hand: " + player.getHand()
+                + " (Score: " + player.getScore() + ")");
         dealer.showFirstHand();
 
         if (player.getScore() == 21) {
@@ -55,10 +68,12 @@ public class BlackjackGame {
             dealerTurn();
         }
 
-        // Определение победителя
         determineWinner();
     }
 
+    /**
+     * Manages the player's turn, allowing them to hit or stand.
+     */
     private void playerTurn() {
         while (true) {
             System.out.println("Hit or Stand? (h/s)");
@@ -66,7 +81,8 @@ public class BlackjackGame {
 
             if (choice.equalsIgnoreCase("h")) {
                 player.addCard(deck.dealCard());
-                System.out.println(player.getName() + "'s hand: " + player.getHand() + " (Score: " + player.getScore() + ")");
+                System.out.println(player.getName() + "'s hand: " + player.getHand()
+                        + " (Score: " + player.getScore() + ")");
                 if (player.isBusted()) {
                     System.out.println(player.getName() + " busts! Dealer wins.");
                     break;
@@ -77,14 +93,19 @@ public class BlackjackGame {
         }
     }
 
+    /**
+     * Manages the dealer's turn according to the fixed rules (hit until 17 or more).
+     */
     private void dealerTurn() {
         System.out.println("\nDealer's turn...");
-        System.out.println(dealer.getName() + "'s hand: " + dealer.getHand() + " (Score: " + dealer.getScore() + ")");
+        System.out.println(dealer.getName() + "'s hand: " + dealer.getHand()
+                + " (Score: " + dealer.getScore() + ")");
 
         while (dealer.getScore() < 17) {
             System.out.println("Dealer hits.");
             dealer.addCard(deck.dealCard());
-            System.out.println(dealer.getName() + "'s hand: " + dealer.getHand() + " (Score: " + dealer.getScore() + ")");
+            System.out.println(dealer.getName() + "'s hand: " + dealer.getHand()
+                    + " (Score: " + dealer.getScore() + ")");
         }
 
         if (dealer.isBusted()) {
@@ -92,8 +113,10 @@ public class BlackjackGame {
         }
     }
 
+    /**
+     * Compares final scores and declares a winner if no one has busted.
+     */
     private void determineWinner() {
-        // Победитель определяется только если ни у кого нет перебора
         if (!player.isBusted() && !dealer.isBusted()) {
             System.out.println("\n--- Final Scores ---");
             System.out.println(player.getName() + ": " + player.getScore());
@@ -109,6 +132,11 @@ public class BlackjackGame {
         }
     }
 
+    /**
+     * The main entry point for the application.
+     *
+     * @param args command line arguments (not used).
+     */
     public static void main(String[] args) {
         BlackjackGame game = new BlackjackGame();
         game.playGame();
