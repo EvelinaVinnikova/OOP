@@ -68,4 +68,23 @@ class HeapSortTest {
         HeapSort.sort(actual);
         assertArrayEquals(expected, actual);
     }
+
+    @Test
+    @DisplayName("Test with a large random array")
+    void testLargeRandomArray() {
+        int size = 5000;
+        int[] actual = new int[size];
+        int[] expected = new int[size];
+
+        java.util.Random random = new java.util.Random(12345L);
+
+        for (int i = 0; i < size; i++) {
+            int randomNumber = random.nextInt();
+            actual[i] = randomNumber;
+            expected[i] = randomNumber;
+        }
+        HeapSort.sort(actual);
+        java.util.Arrays.sort(expected);
+        assertArrayEquals(expected, actual);
+    }
 }
