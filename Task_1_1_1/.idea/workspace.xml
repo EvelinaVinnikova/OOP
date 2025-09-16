@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="307689c5-93c9-4f04-8d11-a3dbc1d15343" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/HeapSortTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/HeapSortTest.java" afterDir="false" />
-    </list>
+    <list default="true" id="307689c5-93c9-4f04-8d11-a3dbc1d15343" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -112,7 +110,7 @@
       <updated>1757938041324</updated>
       <workItem from="1757938042828" duration="2946000" />
       <workItem from="1757941027874" duration="1304000" />
-      <workItem from="1758034132714" duration="2346000" />
+      <workItem from="1758034132714" duration="2660000" />
     </task>
     <servers />
   </component>
