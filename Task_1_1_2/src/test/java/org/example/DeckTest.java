@@ -1,7 +1,8 @@
 package org.example;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -34,9 +35,12 @@ class DeckTest {
         Deck newDeck = new Deck();
         int matches = 0;
         for (int i = 0; i < 52; i++) {
-            if (firstCard.toString().equals(newDeck.dealCard().toString())) {
+            Card dealtCard = newDeck.dealCard();
+            if (dealtCard != null && firstCard.toString().equals(dealtCard.toString())) {
                 matches++;
             }
         }
+        // В полной колоде должна быть только одна такая карта
+        assertEquals(1, matches);
     }
 }
