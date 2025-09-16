@@ -2,6 +2,10 @@ package org.example;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
+import java.util.Random;
+
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 class HeapSortTest {
@@ -76,15 +80,17 @@ class HeapSortTest {
         int[] actual = new int[size];
         int[] expected = new int[size];
 
-        java.util.Random random = new java.util.Random(12345L);
+        Random random = new Random(12345L);
 
         for (int i = 0; i < size; i++) {
             int randomNumber = random.nextInt();
             actual[i] = randomNumber;
             expected[i] = randomNumber;
         }
+
         HeapSort.sort(actual);
-        java.util.Arrays.sort(expected);
+        Arrays.sort(expected);
+
         assertArrayEquals(expected, actual);
     }
 }

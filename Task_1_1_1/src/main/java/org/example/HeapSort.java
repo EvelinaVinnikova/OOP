@@ -9,6 +9,7 @@ public class HeapSort {
 
     /**
      * Основной метод, который запускает сортировку массива.
+     *
      * @param array массив для сортировки.
      */
     public static void sort(int[] array) {
@@ -37,6 +38,7 @@ public class HeapSort {
 
     /**
      * Преобразует поддерево с корнем i в "max-кучу".
+     *
      * @param array массив.
      * @param heapSize размер кучи.
      * @param rootIndex индекс корневого узла поддерева.
@@ -64,6 +66,7 @@ public class HeapSort {
 
     /**
      * Главный метод для демонстрации работы сортировки.
+     *
      * @param args аргументы командной строки (не используются).
      */
     public static void main(String[] args) {

@@ -5,22 +5,42 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="307689c5-93c9-4f04-8d11-a3dbc1d15343" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../Task_1_1_2/.idea/libraries/Gradle__org_apiguardian_apiguardian_api_1_1_2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Task_1_1_2/.idea/libraries/Gradle__org_junit_jupiter_junit_jupiter_5_9_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Task_1_1_2/.idea/libraries/Gradle__org_junit_jupiter_junit_jupiter_api_5_9_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Task_1_1_2/.idea/libraries/Gradle__org_junit_jupiter_junit_jupiter_engine_5_9_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Task_1_1_2/.idea/libraries/Gradle__org_junit_jupiter_junit_jupiter_params_5_9_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Task_1_1_2/.idea/libraries/Gradle__org_junit_platform_junit_platform_commons_1_9_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Task_1_1_2/.idea/libraries/Gradle__org_junit_platform_junit_platform_engine_1_9_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Task_1_1_2/.idea/libraries/Gradle__org_opentest4j_opentest4j_1_2_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Task_1_1_2/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Task_1_1_2/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Task_1_1_2/.idea/modules/Task_1_1_2.main.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Task_1_1_2/.idea/modules/Task_1_1_2.test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Task_1_1_2/Task_1_1_2.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/HeapSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/HeapSort.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/org/example/HeapSortTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/HeapSortTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task_1_1_2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Task_1_1_2/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task_1_1_2/build/classes/java/main/org/example/BlackjackGame.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task_1_1_2/build/classes/java/main/org/example/Card.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task_1_1_2/build/classes/java/main/org/example/Dealer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task_1_1_2/build/classes/java/main/org/example/Deck.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task_1_1_2/build/classes/java/main/org/example/Hand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task_1_1_2/build/classes/java/main/org/example/Participant.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task_1_1_2/build/classes/java/main/org/example/Player.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task_1_1_2/build/classes/java/main/org/example/Rank.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task_1_1_2/build/classes/java/main/org/example/Suit.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task_1_1_2/build/classes/java/test/org/example/DeckTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task_1_1_2/build/classes/java/test/org/example/HandTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task_1_1_2/build/jacoco/test.exec" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task_1_1_2/build/reports/problems/problems-report.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task_1_1_2/build/reports/tests/test/classes/org.example.HandTest.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task_1_1_2/build/reports/tests/test/css/base-style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task_1_1_2/build/reports/tests/test/css/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task_1_1_2/build/reports/tests/test/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task_1_1_2/build/reports/tests/test/js/report.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task_1_1_2/build/reports/tests/test/packages/org.example.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task_1_1_2/build/test-results/test/TEST-org.example.HandTest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task_1_1_2/build/test-results/test/binary/output.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task_1_1_2/build/test-results/test/binary/output.bin.idx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task_1_1_2/build/test-results/test/binary/results.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task_1_1_2/build/tmp/.cache/expanded/zip_9892ccb804f78c0637616b68610d363f/META-INF/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task_1_1_2/build/tmp/.cache/expanded/zip_9892ccb804f78c0637616b68610d363f/META-INF/maven/org.jacoco/org.jacoco.agent/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task_1_1_2/build/tmp/.cache/expanded/zip_9892ccb804f78c0637616b68610d363f/META-INF/maven/org.jacoco/org.jacoco.agent/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task_1_1_2/build/tmp/.cache/expanded/zip_9892ccb804f78c0637616b68610d363f/about.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task_1_1_2/build/tmp/.cache/expanded/zip_9892ccb804f78c0637616b68610d363f/jacocoagent.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task_1_1_2/build/tmp/.cache/expanded/zip_9892ccb804f78c0637616b68610d363f/org/jacoco/agent/AgentJar.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task_1_1_2/build/tmp/.cache/expanded/zip_9892ccb804f78c0637616b68610d363f/org/jacoco/agent/package-info.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task_1_1_2/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Task_1_1_2/build/tmp/compileTestJava/previous-compilation-data.bin" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,11 +147,22 @@
       <updated>1757938041324</updated>
       <workItem from="1757938042828" duration="2946000" />
       <workItem from="1757941027874" duration="1304000" />
-      <workItem from="1758034132714" duration="105000" />
+      <workItem from="1758034132714" duration="1248000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
