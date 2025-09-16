@@ -1,10 +1,10 @@
 package org.example;
 
+import java.util.Random;
+import java.util.Arrays;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
-import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
@@ -87,7 +87,6 @@ class HeapSortTest {
             actual[i] = randomNumber;
             expected[i] = randomNumber;
         }
-
         HeapSort.sort(actual);
         Arrays.sort(expected);
 
