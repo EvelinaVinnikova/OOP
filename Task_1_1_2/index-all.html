@@ -62,13 +62,15 @@ loadScripts(document, 'script');</script>
 </dl>
 <h2 class="title" id="I:B">B</h2>
 <dl class="index">
+<dt><a href="org/example/RoundResult.html#BLACKJACK" class="member-name-link">BLACKJACK</a> - Enum constant in enum class org.example.<a href="org/example/RoundResult.html" title="enum class in org.example">RoundResult</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="org/example/BlackjackGame.html" class="type-name-link" title="class in org.example">BlackjackGame</a> - Class in <a href="org/example/package-summary.html">org.example</a></dt>
 <dd>
 <div class="block">The main class that orchestrates the Blackjack game logic.</div>
 </dd>
-<dt><a href="org/example/BlackjackGame.html#%3Cinit%3E()" class="member-name-link">BlackjackGame()</a> - Constructor for class org.example.<a href="org/example/BlackjackGame.html" title="class in org.example">BlackjackGame</a></dt>
+<dt><a href="org/example/BlackjackGame.html#%3Cinit%3E(org.example.Deck,org.example.Player,org.example.Dealer,java.util.Scanner)" class="member-name-link">BlackjackGame(Deck, Player, Dealer, Scanner)</a> - Constructor for class org.example.<a href="org/example/BlackjackGame.html" title="class in org.example">BlackjackGame</a></dt>
 <dd>
-<div class="block">Constructs a new game instance, initializing all components.</div>
+<div class="block">Constructs a new game instance.</div>
 </dd>
 </dl>
 <h2 class="title" id="I:C">C</h2>
@@ -102,6 +104,10 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Constructs a new Dealer.</div>
 </dd>
+<dt><a href="org/example/RoundResult.html#DEALER_BUST" class="member-name-link">DEALER_BUST</a> - Enum constant in enum class org.example.<a href="org/example/RoundResult.html" title="enum class in org.example">RoundResult</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="org/example/RoundResult.html#DEALER_WINS" class="member-name-link">DEALER_WINS</a> - Enum constant in enum class org.example.<a href="org/example/RoundResult.html" title="enum class in org.example">RoundResult</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="org/example/Deck.html" class="type-name-link" title="class in org.example">Deck</a> - Class in <a href="org/example/package-summary.html">org.example</a></dt>
 <dd>
 <div class="block">Represents a standard 52-card deck.</div>
@@ -221,14 +227,20 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Constructs a player with a given name.</div>
 </dd>
+<dt><a href="org/example/RoundResult.html#PLAYER_BUST" class="member-name-link">PLAYER_BUST</a> - Enum constant in enum class org.example.<a href="org/example/RoundResult.html" title="enum class in org.example">RoundResult</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="org/example/RoundResult.html#PLAYER_WINS" class="member-name-link">PLAYER_WINS</a> - Enum constant in enum class org.example.<a href="org/example/RoundResult.html" title="enum class in org.example">RoundResult</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="org/example/BlackjackGame.html#playGame()" class="member-name-link">playGame()</a> - Method in class org.example.<a href="org/example/BlackjackGame.html" title="class in org.example">BlackjackGame</a></dt>
 <dd>
-<div class="block">Starts and manages the main game loop, playing rounds until the user quits.</div>
+<div class="block">Starts and manages the main game loop.</div>
 </dd>
 <dt><a href="org/example/Dealer.html#playTurn(org.example.Deck)" class="member-name-link">playTurn(Deck)</a> - Method in class org.example.<a href="org/example/Dealer.html" title="class in org.example">Dealer</a></dt>
 <dd>
 <div class="block">Plays the dealer's turn according to the house rules.</div>
 </dd>
+<dt><a href="org/example/RoundResult.html#PUSH" class="member-name-link">PUSH</a> - Enum constant in enum class org.example.<a href="org/example/RoundResult.html" title="enum class in org.example">RoundResult</a></dt>
+<dd>&nbsp;</dd>
 </dl>
 <h2 class="title" id="I:Q">Q</h2>
 <dl class="index">
@@ -242,6 +254,8 @@ loadScripts(document, 'script');</script>
 <div class="block">Represents the ranks of cards in a standard deck, along with their point values.</div>
 </dd>
 <dt><a href="org/example/Card.html#reveal()" class="member-name-link">reveal()</a> - Method in class org.example.<a href="org/example/Card.html" title="class in org.example">Card</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="org/example/RoundResult.html" class="type-name-link" title="enum class in org.example">RoundResult</a> - Enum Class in <a href="org/example/package-summary.html">org.example</a></dt>
 <dd>&nbsp;</dd>
 </dl>
 <h2 class="title" id="I:S">S</h2>
@@ -284,11 +298,20 @@ loadScripts(document, 'script');</script>
 <dd>
 <div class="block">Returns the enum constant of this class with the specified name.</div>
 </dd>
+<dt><a href="org/example/RoundResult.html#valueOf(java.lang.String)" class="member-name-link">valueOf(String)</a> - Static method in enum class org.example.<a href="org/example/RoundResult.html" title="enum class in org.example">RoundResult</a></dt>
+<dd>
+<div class="block">Returns the enum constant of this class with the specified name.</div>
+</dd>
 <dt><a href="org/example/Suit.html#valueOf(java.lang.String)" class="member-name-link">valueOf(String)</a> - Static method in enum class org.example.<a href="org/example/Suit.html" title="enum class in org.example">Suit</a></dt>
 <dd>
 <div class="block">Returns the enum constant of this class with the specified name.</div>
 </dd>
 <dt><a href="org/example/Rank.html#values()" class="member-name-link">values()</a> - Static method in enum class org.example.<a href="org/example/Rank.html" title="enum class in org.example">Rank</a></dt>
+<dd>
+<div class="block">Returns an array containing the constants of this enum class, in
+the order they are declared.</div>
+</dd>
+<dt><a href="org/example/RoundResult.html#values()" class="member-name-link">values()</a> - Static method in enum class org.example.<a href="org/example/RoundResult.html" title="enum class in org.example">RoundResult</a></dt>
 <dd>
 <div class="block">Returns an array containing the constants of this enum class, in
 the order they are declared.</div>
