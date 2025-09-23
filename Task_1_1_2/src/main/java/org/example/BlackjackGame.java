@@ -31,17 +31,13 @@ public class BlackjackGame {
         while (true) {
             RoundResult result = playRound();
 
-            // Вся логика вывода теперь здесь
             switch (result) {
                 case PLAYER_WINS:
                 case DEALER_WINS:
                 case PUSH:
-                    // <-- Показываем финальные очки только в этих случаях
                     System.out.println("\n--- Final Scores ---");
-                    System.out.println(player.getName() + ": " + player.getScore());
-                    // Раскрываем карту дилера перед показом его очков
-                    dealer.getHand().getCards().get(1).reveal();
-                    System.out.println(dealer.getName() + ": " + dealer.getScore());
+                    System.out.println(player.getName() + "'s hand: " + player.getHand() + " (Score: " + player.getScore() + ")");
+                    System.out.println(dealer.getName() + "'s hand: " + dealer.getHand() + " (Score: " + dealer.getScore() + ")");
 
                     if (result == RoundResult.PLAYER_WINS) {
                         System.out.println(player.getName() + " wins!");
@@ -51,7 +47,6 @@ public class BlackjackGame {
                         System.out.println("It's a push (tie)!");
                     }
                     break;
-
                 case PLAYER_BUST:
                     System.out.println(player.getName() + " busts! Dealer wins.");
                     break;
@@ -74,7 +69,6 @@ public class BlackjackGame {
 
     /**
      * Manages the logic for a single round of Blackjack and returns the result.
-     * This method no longer prints final results.
      */
     private RoundResult playRound() {
         deck.shuffle();
@@ -96,23 +90,19 @@ public class BlackjackGame {
             return RoundResult.BLACKJACK;
         }
 
-        RoundResult playerResult = playerTurn();
-        if (playerResult != null) { // Если игрок проиграл (bust), раунд заканчивается
-            return playerResult;
+        playerTurn();
+
+        if (!player.isBusted()) {
+            dealerTurn();
         }
 
-        RoundResult dealerResult = dealerTurn();
-        if (dealerResult != null) { // Если дилер проиграл (bust), раунд заканчивается
-            return dealerResult;
-        }
-
-        return determineWinner(); // Если никто не проиграл, определяем победителя по очкам
+        return determineWinner();
     }
 
     /**
-     * Manages the player's turn. Returns PLAYER_BUST if the player busts, otherwise null.
+     * Manages the player's turn, allowing them to hit or stand.
      */
-    private RoundResult playerTurn() {
+    private void playerTurn() {
         while (true) {
             System.out.println("Hit or Stand? (h/s)");
             String choice = scanner.next();
@@ -122,30 +112,33 @@ public class BlackjackGame {
                 System.out.println(player.getName() + "'s hand: " + player.getHand()
                         + " (Score: " + player.getScore() + ")");
                 if (player.isBusted()) {
-                    return RoundResult.PLAYER_BUST; // <-- Возвращаем результат, а не печатаем
+                    break; // Просто выходим из цикла
                 }
             } else if (choice.equalsIgnoreCase("s")) {
-                return null; // Игрок остановился, игра продолжается
+                break;
             }
         }
     }
 
     /**
-     * Manages the dealer's turn. Returns DEALER_BUST if the dealer busts, otherwise null.
+     * Manages the dealer's turn by telling the dealer object to play its turn.
      */
-    private RoundResult dealerTurn() {
+    private void dealerTurn() {
         System.out.println("\nDealer's turn...");
-        dealer.playTurn(deck); // Логика хода дилера спрятана в его классе
-        if (dealer.isBusted()) {
-            return RoundResult.DEALER_BUST; // <-- Возвращаем результат, а не печатаем
-        }
-        return null; // Дилер остановился, игра продолжается
+        dealer.playTurn(deck);
     }
 
     /**
-     * Compares final scores and returns the winner.
+     * Determines the winner of the round based on the final state of the hands.
+     * This method now handles all outcomes, including busts.
      */
     private RoundResult determineWinner() {
+        if (player.isBusted()) {
+            return RoundResult.PLAYER_BUST;
+        }
+        if (dealer.isBusted()) {
+            return RoundResult.DEALER_BUST;
+        }
         if (player.getScore() > dealer.getScore()) {
             return RoundResult.PLAYER_WINS;
         } else if (dealer.getScore() > player.getScore()) {
