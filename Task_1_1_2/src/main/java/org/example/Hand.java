@@ -2,6 +2,7 @@ package org.example;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Represents a hand of cards held by a participant.
@@ -73,6 +74,10 @@ public class Hand {
      */
     @Override
     public String toString() {
-        return cards.toString();
+        return cards.stream()
+                .map(Card::toString)
+                .collect(Collectors.joining(",", "[", "]"));
+
+
     }
 }

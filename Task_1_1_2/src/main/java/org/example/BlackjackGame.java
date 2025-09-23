@@ -55,7 +55,9 @@ public class BlackjackGame {
         System.out.println("\n--- New Round ---");
         System.out.println(player.getName() + "'s hand: " + player.getHand()
                 + " (Score: " + player.getScore() + ")");
-        dealer.showFirstHand();
+
+        dealer.getHand().getCards().get(1).hide();
+        System.out.println("Dealer's hand: " + dealer.getHand());
 
         if (player.getScore() == 21) {
             System.out.println("Blackjack! " + player.getName() + " wins!");
@@ -94,19 +96,12 @@ public class BlackjackGame {
     }
 
     /**
-     * Manages the dealer's turn according to the fixed rules (hit until 17 or more).
+     * Manages the dealer's turn by telling the dealer object to play its turn.
      */
     private void dealerTurn() {
         System.out.println("\nDealer's turn...");
-        System.out.println(dealer.getName() + "'s hand: " + dealer.getHand()
-                + " (Score: " + dealer.getScore() + ")");
 
-        while (dealer.getScore() < 17) {
-            System.out.println("Dealer hits.");
-            dealer.addCard(deck.dealCard());
-            System.out.println(dealer.getName() + "'s hand: " + dealer.getHand()
-                    + " (Score: " + dealer.getScore() + ")");
-        }
+        dealer.playTurn(deck);
 
         if (dealer.isBusted()) {
             System.out.println("Dealer busts! " + player.getName() + " wins!");

@@ -6,6 +6,7 @@ package org.example;
 public class Card {
     private final Suit suit;
     private final Rank rank;
+    private boolean isHidden;
 
     /**
      * Constructs a card with a specified suit and rank.
@@ -16,6 +17,15 @@ public class Card {
     public Card(Suit suit, Rank rank) {
         this.suit = suit;
         this.rank = rank;
+        this.isHidden = false;
+    }
+
+    public void hide() {
+        this.isHidden = true;
+    }
+
+    public void reveal() {
+        this.isHidden = false;
     }
 
     /**
@@ -43,6 +53,9 @@ public class Card {
      */
     @Override
     public String toString() {
+        if (isHidden) {
+            return "<hidden>";
+        }
         return rank + " of " + suit;
     }
 }
