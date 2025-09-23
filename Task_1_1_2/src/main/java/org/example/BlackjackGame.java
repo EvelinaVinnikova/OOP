@@ -61,6 +61,9 @@ public class BlackjackGame {
                 case BLACKJACK:
                     System.out.println("Blackjack! " + player.getName() + " wins!");
                     break;
+
+                default:
+                    throw new IllegalStateException("Unhandled RoundResult: " + result);
             }
 
             System.out.println("\nPlay another round? (yes/no)");
