@@ -36,8 +36,10 @@ public class BlackjackGame {
                 case DEALER_WINS:
                 case PUSH:
                     System.out.println("\n--- Final Scores ---");
-                    System.out.println(player.getName() + "'s hand: " + player.getHand() + " (Score: " + player.getScore() + ")");
-                    System.out.println(dealer.getName() + "'s hand: " + dealer.getHand() + " (Score: " + dealer.getScore() + ")");
+                    System.out.println(player.getName() + "'s hand: " + player.getHand()
+                            + " (Score: " + player.getScore() + ")");
+                    System.out.println(dealer.getName() + "'s hand: " + dealer.getHand()
+                            + " (Score: " + dealer.getScore() + ")");
 
                     if (result == RoundResult.PLAYER_WINS) {
                         System.out.println(player.getName() + " wins!");
@@ -47,12 +49,15 @@ public class BlackjackGame {
                         System.out.println("It's a push (tie)!");
                     }
                     break;
+
                 case PLAYER_BUST:
                     System.out.println(player.getName() + " busts! Dealer wins.");
                     break;
+
                 case DEALER_BUST:
                     System.out.println("Dealer busts! " + player.getName() + " wins!");
                     break;
+
                 case BLACKJACK:
                     System.out.println("Blackjack! " + player.getName() + " wins!");
                     break;
@@ -86,7 +91,7 @@ public class BlackjackGame {
         dealer.getHand().getCards().get(1).hide();
         System.out.println("Dealer's hand: " + dealer.getHand());
 
-        if (player.getScore() == 21) {
+        if (player.getScore() == GameRules.BLACKJACK_SCORE) {
             return RoundResult.BLACKJACK;
         }
 
@@ -112,7 +117,7 @@ public class BlackjackGame {
                 System.out.println(player.getName() + "'s hand: " + player.getHand()
                         + " (Score: " + player.getScore() + ")");
                 if (player.isBusted()) {
-                    break; // Просто выходим из цикла
+                    break; // player busts → exit loop
                 }
             } else if (choice.equalsIgnoreCase("s")) {
                 break;
