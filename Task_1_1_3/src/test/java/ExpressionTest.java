@@ -87,6 +87,6 @@ public class ExpressionTest {
         assertEquals(5.0, e.eval(Map.of("x", 10.0)));
 
         Expression derivative = e.derivative("x");
-        assertEquals(0.5, derivative.eval(Map.of()));
+        assertEquals(0.5, derivative.eval(Map.of("x", 10.0)));
     }
 }
