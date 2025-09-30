@@ -14,19 +14,17 @@ public class Div extends BinaryOperation {
 
     @Override
     public String toString() {
-        // Формируем строку вида "(left/right)"
         return "(" + left.toString() + "/" + right.toString() + ")";
     }
 
     @Override
     public double eval(Map<String, Double> variables) {
-        // Рекурсивно вычисляем и делим результаты
         return left.eval(variables) / right.eval(variables);
     }
 
     @Override
     public Expression derivative(String varName) {
-        // Применяем правило частного: (f/g)' = (f'*g - f*g') / g^2
+        // (f/g)' = (f'*g - f*g') / g^2
         // f' = left.derivative(varName)
         // g' = right.derivative(varName)
         // f = left

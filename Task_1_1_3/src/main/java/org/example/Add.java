@@ -14,19 +14,16 @@ public class Add extends BinaryOperation {
 
     @Override
     public String toString() {
-        // Формируем строку вида "(left+right)"
         return "(" + left.toString() + "+" + right.toString() + ")";
     }
 
     @Override
     public double eval(Map<String, Double> variables) {
-        // Рекурсивно вычисляем левую и правую части и складываем результаты
         return left.eval(variables) + right.eval(variables);
     }
 
     @Override
     public Expression derivative(String varName) {
-        // Применяем правило дифференцирования суммы: (f+g)' = f' + g'
         return new Add(left.derivative(varName), right.derivative(varName));
     }
 }

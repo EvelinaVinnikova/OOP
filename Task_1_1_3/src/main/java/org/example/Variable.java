@@ -16,13 +16,11 @@ public class Variable extends Expression {
 
     @Override
     public String toString() {
-        // Просто возвращаем имя переменной
         return this.name;
     }
 
     @Override
     public double eval(Map<String, Double> variables) {
-        // Ищем значение этой переменной в переданной карте
         return variables.get(this.name);
     }
 

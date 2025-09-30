@@ -14,19 +14,17 @@ public class Sub extends BinaryOperation {
 
     @Override
     public String toString() {
-        // Формируем строку вида "(left-right)"
         return "(" + left.toString() + "-" + right.toString() + ")";
     }
 
     @Override
     public double eval(Map<String, Double> variables) {
-        // Рекурсивно вычисляем левую и правую части и вычитаем
         return left.eval(variables) - right.eval(variables);
     }
 
     @Override
     public Expression derivative(String varName) {
-        // Применяем правило дифференцирования разности: (f-g)' = f' - g'
+        // (f-g)' = f' - g'
         return new Sub(left.derivative(varName), right.derivative(varName));
     }
 }

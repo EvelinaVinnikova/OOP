@@ -14,19 +14,17 @@ public class Mul extends BinaryOperation {
 
     @Override
     public String toString() {
-        // Формируем строку вида "(left*right)"
         return "(" + left.toString() + "*" + right.toString() + ")";
     }
 
     @Override
     public double eval(Map<String, Double> variables) {
-        // Рекурсивно вычисляем и перемножаем результаты
         return left.eval(variables) * right.eval(variables);
     }
 
     @Override
     public Expression derivative(String varName) {
-        // Применяем правило произведения: (f*g)' = f'*g + f*g'
+        // (f*g)' = f'*g + f*g'
         // f' = left.derivative(varName)
         // g' = right.derivative(varName)
         // f = left
