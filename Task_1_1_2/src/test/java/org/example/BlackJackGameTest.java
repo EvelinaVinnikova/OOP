@@ -19,7 +19,7 @@ class BlackjackGameTest {
         fakeDeck.addCard(new Card(Suit.DIAMONDS, Rank.EIGHT)); // Dealer's card 2
         fakeDeck.addCard(new Card(Suit.CLUBS, Rank.KING)); // Player's card 3
 
-        String simulatedInput = "h\n";
+        String simulatedInput = "h" + System.lineSeparator() + "no";;
         Scanner fakeScanner = new Scanner(simulatedInput);
 
         Player player = new Player("Player");
