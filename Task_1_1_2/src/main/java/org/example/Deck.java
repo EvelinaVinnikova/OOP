@@ -41,4 +41,21 @@ public class Deck {
         }
         return cards.remove(cards.size() - 1);
     }
+    /**
+     * Clears all cards from the deck.
+     * This is useful for creating a controlled deck for testing purposes.
+     */
+    public void clear() {
+        this.cards.clear(); // Assuming your list of cards is named 'cards'
+    }
+
+    /**
+     * Adds a specific card to the deck.
+     * This is useful for creating a controlled deck for testing purposes.
+     *
+     * @param card The card to add to the top of the deck.
+     */
+    public void addCard(Card card) {
+        this.cards.add(card); // Assuming your list of cards is named 'cards'
+    }
 }

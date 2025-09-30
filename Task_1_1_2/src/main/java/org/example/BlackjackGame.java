@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.GameRules;
 import java.util.Scanner;
 
 /**
@@ -78,7 +79,7 @@ public class BlackjackGame {
     /**
      * Manages the logic for a single round of Blackjack and returns the result.
      */
-    private RoundResult playRound() {
+    protected RoundResult playRound() {
         deck.shuffle();
         player.getHand().clear();
         dealer.getHand().clear();

@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.GameRules;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -43,7 +44,7 @@ public class Hand {
             }
         }
 
-        while (score > 21 && aceCount > 0) {
+        while (score > GameRules.MAX_SCORE && aceCount > 0) {
             score -= 10;
             aceCount--;
         }

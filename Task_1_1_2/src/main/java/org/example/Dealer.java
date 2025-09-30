@@ -1,4 +1,5 @@
 package org.example;
+import org.example.GameRules;
 
 /**
  * Represents the dealer in the Blackjack game.
@@ -24,7 +25,7 @@ public class Dealer extends Participant {
         System.out.println(this.getName() + "'s hand: " + this.getHand()
                 + " (Score: " + this.getScore() + ")");
 
-        while (this.getHand().getScore() < 17) {
+        while (this.getHand().getScore() < GameRules.DEALER_STANDS_ON) {
             System.out.println("Dealer hits.");
             this.addCard(deck.dealCard());
             System.out.println(this.getName() + "'s hand: " + this.getHand()

@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.GameRules;
+
 /**
  * Represents a participant in the Blackjack game, either a player or a dealer.
  */
@@ -34,6 +36,6 @@ public abstract class Participant {
     }
 
     public boolean isBusted() {
-        return getScore() > 21;
+        return getScore() > GameRules.MAX_SCORE;
     }
 }
