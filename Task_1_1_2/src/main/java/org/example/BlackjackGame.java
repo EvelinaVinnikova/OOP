@@ -114,16 +114,26 @@ public class BlackjackGame {
     private void playerTurn() {
         while (true) {
             System.out.println("Hit or Stand? (h/s)");
-            String choice = scanner.next();
+            if (!scanner.hasNext()) {
+                break;
+            }
+            String choice = scanner.next().trim().toLowerCase();
 
-            if (choice.equalsIgnoreCase("h")) {
+            boolean hit = choice.equals("h") || choice.equals("hit") || choice.equals("1")
+                    || choice.equals("y") || choice.equals("yes");
+            boolean stand = choice.equals("s") || choice.equals("stand") || choice.equals("0")
+                    || choice.equals("n") || choice.equals("no");
+
+            if (hit) {
                 player.addCard(deck.dealCard());
                 System.out.println(player.getName() + "'s hand: " + player.getHand()
                         + " (Score: " + player.getScore() + ")");
                 if (player.isBusted()) {
-                    break; // player busts → exit loop
+                    break;
                 }
-            } else if (choice.equalsIgnoreCase("s")) {
+            } else if (stand) {
+                break;
+            } else {
                 break;
             }
         }
