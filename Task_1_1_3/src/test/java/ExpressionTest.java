@@ -6,6 +6,8 @@ import org.example.Constant;
 import org.example.Variable;
 import org.example.Mul;
 import org.example.ExpressionParser;
+import org.example.Sub;
+import org.example.Div;
 
 import org.junit.jupiter.api.Test;
 import java.util.Map;
@@ -62,5 +64,29 @@ public class ExpressionTest {
 
         double result = e.eval(Map.of("x", 10.0));
         assertEquals(23.0, result);
+    }
+
+    @Test
+    void testSubtraction() {
+        Expression e = new Sub(new Constant(10), new Variable("x"));
+
+        assertEquals("(10.0-x)", e.toString());
+
+        assertEquals(7.0, e.eval(Map.of("x", 3.0)));
+
+        Expression derivative = e.derivative("x");
+        assertEquals(-1.0, derivative.eval(Map.of()));
+    }
+
+    @Test
+    void testDivision() {
+        Expression e = new Div(new Variable("x"), new Constant(2));
+
+        assertEquals("(x/2.0)", e.toString());
+
+        assertEquals(5.0, e.eval(Map.of("x", 10.0)));
+
+        Expression derivative = e.derivative("x");
+        assertEquals(0.5, derivative.eval(Map.of()));
     }
 }
