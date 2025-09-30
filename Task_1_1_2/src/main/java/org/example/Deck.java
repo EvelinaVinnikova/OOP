@@ -41,6 +41,7 @@ public class Deck {
         }
         return cards.remove(cards.size() - 1);
     }
+
     /**
      * Clears all cards from the deck.
      * This is useful for creating a controlled deck for testing purposes.

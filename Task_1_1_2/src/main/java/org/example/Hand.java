@@ -1,9 +1,9 @@
 package org.example;
 
-import org.example.GameRules;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.example.GameRules;
 
 /**
  * Represents a hand of cards held by a participant.

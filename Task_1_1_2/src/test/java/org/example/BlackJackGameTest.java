@@ -1,12 +1,12 @@
 package org.example;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.Test;
 import java.util.Scanner;
+import org.junit.jupiter.api.Test;
 
 
-class BlackjackGameTest {
+class BlackJackGameTest {
     @Test
     void testPlayGame_PlayerHitsAndBusts() {
         // Preparation

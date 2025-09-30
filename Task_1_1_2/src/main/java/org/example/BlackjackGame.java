@@ -1,7 +1,7 @@
 package org.example;
 
-import org.example.GameRules;
 import java.util.Scanner;
+import org.example.GameRules;
 
 /**
  * The main class that orchestrates the Blackjack game logic.
@@ -114,7 +114,7 @@ public class BlackjackGame {
     private void playerTurn() {
         while (true) {
             System.out.println("Hit or Stand? (h/s)");
-            if (!scanner.hasNext()) {
+            if (!scanner.hasNext()) { // вход закончился — трактуем как Stand
                 break;
             }
             String choice = scanner.next().trim().toLowerCase();
@@ -126,11 +126,7 @@ public class BlackjackGame {
 
             if (hit) {
                 player.addCard(deck.dealCard());
-                System.out.println(player.getName() + "'s hand: " + player.getHand()
-                        + " (Score: " + player.getScore() + ")");
-                if (player.isBusted()) {
-                    break;
-                }
+                if (player.isBusted()) break;
             } else if (stand) {
                 break;
             } else {
