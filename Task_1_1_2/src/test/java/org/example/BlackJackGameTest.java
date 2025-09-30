@@ -37,57 +37,53 @@ class BlackJackGameTest {
 
     @Test
     void testPlayGame_PlayerStandsAndWins() {
-        // Player gets 10 + 10 (20).Dealer gets 10 + 7 (17)
+        // Crave: P:10, D:10, P:10, D:7  => finally P=20, D=17, Player stands
         Deck fakeDeck = new Deck();
         fakeDeck.clear();
-        fakeDeck.addCard(new Card(Suit.CLUBS, Rank.TEN));    // Player
-        fakeDeck.addCard(new Card(Suit.HEARTS, Rank.TEN));   // Dealer
-        fakeDeck.addCard(new Card(Suit.SPADES, Rank.KING));   // Player (+ 10)
-        fakeDeck.addCard(new Card(Suit.DIAMONDS, Rank.SEVEN)); // Dealer (hidden)
-
-        // Simulating the input: "s" (stand), then "no"
+        fakeDeck.addCard(new Card(Suit.DIAMONDS, Rank.SEVEN)); // D2 (hidden)
+        fakeDeck.addCard(new Card(Suit.SPADES, Rank.KING));    // P2 (10)
+        fakeDeck.addCard(new Card(Suit.HEARTS, Rank.TEN));     // D1 (10)
+        fakeDeck.addCard(new Card(Suit.CLUBS, Rank.TEN));      // P1 (10)
+    
         String simulatedInput = "s" + System.lineSeparator() + "no";
         Scanner fakeScanner = new Scanner(simulatedInput);
-
+    
         Player player = new Player("Player");
         Dealer dealer = new Dealer();
         BlackjackGame game = new BlackjackGame(fakeDeck, player, dealer, fakeScanner);
-
-        // Act
+    
         game.playGame();
-
-        // Assert
-        assertFalse(player.isBusted(), "Player should not be busted.");
-        assertFalse(dealer.isBusted(), "Dealer should not be busted.");
-        assertEquals(20, player.getScore(), "Player's score should be 20.");
-        assertEquals(17, dealer.getScore(), "Dealer's score should be 17.");
+    
+        assertFalse(player.isBusted());
+        assertFalse(dealer.isBusted());
+        assertEquals(20, player.getScore());
+        assertEquals(17, dealer.getScore());
     }
 
     @Test
     void testPlayGame_Push() {
-        // Player gets 10 + 9 (19). Dealer gets 10 + 9 (19).
+        // Crave: P:10, D:10, P:9, D:9  => finally 19:19, PUSH
         Deck fakeDeck = new Deck();
         fakeDeck.clear();
-        fakeDeck.addCard(new Card(Suit.CLUBS, Rank.TEN));    // Player
-        fakeDeck.addCard(new Card(Suit.HEARTS, Rank.TEN));   // Dealer
-        fakeDeck.addCard(new Card(Suit.SPADES, Rank.NINE));   // Player
-        fakeDeck.addCard(new Card(Suit.DIAMONDS, Rank.NINE)); // Dealer (hidden)
-
-        // Simulating the input: "s" (stand), then "no".
+        fakeDeck.addCard(new Card(Suit.DIAMONDS, Rank.NINE));  // D2 (hidden)
+        fakeDeck.addCard(new Card(Suit.SPADES, Rank.NINE));    // P2 (9)
+        fakeDeck.addCard(new Card(Suit.HEARTS, Rank.TEN));     // D1 (10)
+        fakeDeck.addCard(new Card(Suit.CLUBS, Rank.TEN));      // P1 (10)
+    
         String simulatedInput = "s" + System.lineSeparator() + "no";
         Scanner fakeScanner = new Scanner(simulatedInput);
-
+    
         Player player = new Player("Player");
         Dealer dealer = new Dealer();
         BlackjackGame game = new BlackjackGame(fakeDeck, player, dealer, fakeScanner);
-
-        // Act
+    
         game.playGame();
-
-        // Assert
-        assertEquals(19, player.getScore(), "Player's score should be 19.");
-        assertEquals(19, dealer.getScore(), "Dealer's score should be 19.");
+    
+        assertEquals(19, player.getScore());
+        assertEquals(19, dealer.getScore());
     }
 
+
 }
+
 
