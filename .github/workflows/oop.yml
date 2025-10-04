@@ -1,62 +1,85 @@
-# This is a basic workflow to help you get started with Actions
-
 name: CI
 
-# Controls when the workflow will run
 on:
   pull_request:
-    branches: [ "main" ]  
+    branches: [ "main" ]
   workflow_dispatch:
+
+permissions:
+  contents: write
+  checks: write
+  pull-requests: write
 
 jobs:
   build:
-    permissions: write-all
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./${{ github.event.pull_request.title }}
+
     steps:
-      - uses: actions/checkout@v3
-      
+      - uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Detect Gradle project dir
+        id: detect
+        run: |
+          set -e
+          DIR="$(dirname "$(find . -maxdepth 3 -type f -name gradlew | head -n1)")"
+          if [ -z "$DIR" ]; then
+            echo "gradlew not found" >&2
+            exit 1
+          fi
+          # убираем ведущую ./ если есть
+          DIR="${DIR#./}"
+          echo "PROJECT_DIR=$DIR" >> "$GITHUB_ENV"
+          echo "Detected PROJECT_DIR=$DIR"
+
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
 
       - name: Make gradlew executable
+        working-directory: ${{ env.PROJECT_DIR }}
         run: chmod +x ./gradlew
-    
-      - name: Execute Gradle build
-        run: ./gradlew build
+
+      - name: Build
+        working-directory: ${{ env.PROJECT_DIR }}
+        run: ./gradlew clean build
 
       - name: Generate Jacoco report
+        working-directory: ${{ env.PROJECT_DIR }}
         run: ./gradlew jacocoTestReport
 
-      - name: Check coverage and publish
-        id: jacoco
+      - name: Check coverage and publish (same-repo PRs only)
+        if: github.event.pull_request.head.repo.full_name == github.repository
         uses: madrapps/jacoco-report@v1.2
         with:
-          paths: ./${{ github.event.pull_request.title }}/build/reports/jacoco/test/jacocoTestReport.xml
+          # путь ОТ КОРНЯ РЕПО
+          paths: ${{ env.PROJECT_DIR }}/build/reports/jacoco/test/jacocoTestReport.xml
           token: ${{ secrets.GITHUB_TOKEN }}
           min-coverage-overall: 80
           min-coverage-changed-files: 80
 
       - name: Generate javadoc
+        working-directory: ${{ env.PROJECT_DIR }}
         run: ./gradlew javadoc
 
-      - name: Publish javadoc
+      - name: Publish javadoc (same-repo PRs only)
+        if: github.event.pull_request.head.repo.full_name == github.repository
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: gh-pages
           clean: true
-          folder: ${{ github.event.pull_request.title }}/build/docs/javadoc
-          target-folder: ${{ github.event.pull_request.title }}
+          folder: ${{ env.PROJECT_DIR }}/build/docs/javadoc
+          target-folder: ${{ env.PROJECT_DIR }}
 
   checkstyle:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
+      - uses: actions/checkout@v3
       - name: Run check style
         uses: nikitasavinov/checkstyle-action@master
         with:
