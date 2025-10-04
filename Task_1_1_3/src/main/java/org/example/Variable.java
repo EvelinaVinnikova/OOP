@@ -21,7 +21,13 @@ public class Variable extends Expression {
 
     @Override
     public double eval(Map<String, Double> variables) {
-        return variables.get(this.name);
+        Double value = variables.get(this.name);
+
+        if (value == null) {
+            throw new IllegalArgumentException("Variable '" + this.name + "' is not defined.");
+        }
+
+        return value;
     }
 
     @Override

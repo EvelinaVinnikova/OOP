@@ -1,4 +1,5 @@
 package org.example;
+import java.util.HashMap;
 import java.util.Map;
 
 public abstract class Expression {
@@ -15,7 +16,7 @@ public abstract class Expression {
      * @param variables a map where the key is the variable name and the value is its numeric value.
      * @return the result of the evaluation.
      */
-    public abstract double eval(Map<String, Double> variables);
+    protected abstract double eval(Map<String, Double> variables);
 
     /**
      * Finds the symbolic derivative of the expression with respect to a given variable.
@@ -23,4 +24,27 @@ public abstract class Expression {
      * @return a new expression representing the derivative.
      */
     public abstract Expression derivative(String varName);
+
+    /**
+     * Evaluates the expression by parsing a string of variable assignments.
+     * @param variablesString a string like "x = 10; y = 13".
+     * @return the result of the evaluation.
+     */
+    public double eval(String variablesString) {
+        Map<String, Double> variablesMap = new HashMap<>();
+
+        String[] assignments = variablesString.split(";");
+
+        for (String assignment : assignments) {
+            String[] parts = assignment.split("=");
+            if (parts.length == 2) {
+                String varName = parts[0].trim();
+                String valueStr = parts[1].trim();
+
+                variablesMap.put(varName, Double.parseDouble(valueStr));
+            }
+        }
+
+        return this.eval(variablesMap);
+    }
 }
