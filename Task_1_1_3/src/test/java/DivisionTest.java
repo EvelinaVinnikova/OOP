@@ -6,7 +6,6 @@ import org.example.Expression;
 import org.example.Variable;
 import org.junit.jupiter.api.Test;
 
-import java.util.Map;
 
 public class DivisionTest {
     @Test

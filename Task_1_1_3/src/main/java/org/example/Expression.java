@@ -12,9 +12,10 @@ public abstract class Expression {
     public abstract String toString();
 
     /**
-     * Evaluates the value of the expression by substituting variable values.
-     * @param variables a map where the key is the variable name and the value is its numeric value.
+     * Evaluates the value of the expression...
+     * @param variables a map...
      * @return the result of the evaluation.
+     * @throws IllegalArgumentException if a variable in the expression is not defined in the map.
      */
     protected abstract double eval(Map<String, Double> variables);
 
@@ -26,9 +27,10 @@ public abstract class Expression {
     public abstract Expression derivative(String varName);
 
     /**
-     * Evaluates the expression by parsing a string of variable assignments.
+     * Evaluates the expression by parsing a string...
      * @param variablesString a string like "x = 10; y = 13".
      * @return the result of the evaluation.
+     * @throws IllegalArgumentException if a variable in the expression is not defined in the string.
      */
     public double eval(String variablesString) {
         Map<String, Double> variablesMap = new HashMap<>();

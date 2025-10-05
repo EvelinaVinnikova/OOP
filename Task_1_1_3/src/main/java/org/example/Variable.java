@@ -19,14 +19,16 @@ public class Variable extends Expression {
         return this.name;
     }
 
-    @Override
+    /**
+     * Evaluates the expression by parsing a string...
+     * @return the result of the evaluation.
+     * @throws IllegalArgumentException if a variable in the expression is not defined in the string.
+     */
     public double eval(Map<String, Double> variables) {
         Double value = variables.get(this.name);
-
         if (value == null) {
             throw new IllegalArgumentException("Variable '" + this.name + "' is not defined.");
         }
-
         return value;
     }
 
