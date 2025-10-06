@@ -1,10 +1,16 @@
 package org.example;
+
 import java.util.Map;
 
+
+/**
+ * Binary subtraction of two expressions.
+ */
 public class Sub extends BinaryOperation {
 
     /**
      * Constructs a subtraction expression.
+     *
      * @param left the left-hand side expression.
      * @param right the right-hand side expression.
      */

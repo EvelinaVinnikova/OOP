@@ -10,6 +10,7 @@ public class Div extends BinaryOperation {
 
     /**
      * Constructs a division expression.
+     *
      * @param left the numerator expression.
      * @param right the denominator expression.
      */
