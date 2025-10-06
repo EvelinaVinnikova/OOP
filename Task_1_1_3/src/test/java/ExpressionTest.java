@@ -5,8 +5,12 @@ import org.example.Variable;
 import org.junit.jupiter.api.Test;
 
 public class ExpressionTest {
+
+    /**
+     * Evaluating a variable 'y' with only 'x' provided must throw.
+     */
     @Test
-    void testEval_ThrowsExceptionForUndefinedVariable() {
+    void testEvalThrowsExceptionForUndefinedVariable() {
         Expression e = new Variable("y");
         assertThrows(IllegalArgumentException.class, () -> {e.eval("x=10.0");});
     }

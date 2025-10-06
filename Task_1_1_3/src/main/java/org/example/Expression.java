@@ -1,4 +1,5 @@
 package org.example;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,7 +31,8 @@ public abstract class Expression {
      * Evaluates the expression by parsing a string...
      * @param variablesString a string like "x = 10; y = 13".
      * @return the result of the evaluation.
-     * @throws IllegalArgumentException if a variable in the expression is not defined in the string.
+     * @throws IllegalArgumentException if a variable in the expression
+     * is not defined in the string.
      */
     public double eval(String variablesString) {
         Map<String, Double> variablesMap = new HashMap<>();

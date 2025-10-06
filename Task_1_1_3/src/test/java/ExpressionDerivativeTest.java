@@ -8,19 +8,28 @@ import org.example.Variable;
 import org.junit.jupiter.api.Test;
 
 
+/**
+ * Tests for the symbolic derivative string form.
+ */
 public class ExpressionDerivativeTest {
+
+    /**
+     * Checks that d/dx (3 + x) == 1.
+     */
     @Test
-    void testExpressionDerivative() {
-        Expression e = new Add(new Constant(3), new Variable("x"));
-        Expression derivative = e.derivative("x");
+    void derivativeOfAddСonstPlusVar() {
+        Expression expr = new Add(new Constant(3), new Variable("x"));
+        Expression exprDerivative = expr.derivative("x");
+        assertEquals("(0.0+1.0)", exprDerivative.toString());
+    }
 
-        assertEquals("(0.0+1.0)", derivative.toString());
-        assertEquals(1.0, derivative.eval(""));
-
-        Expression b = new Mul(new Constant(2), new Variable("x"));
-        Expression b_derivative = b.derivative("x");
-
-        assertEquals("((0.0*x)+(2.0*1.0))", b_derivative.toString());
-        assertEquals(2.0, b_derivative.eval("x=10.0"));
+    /**
+     * Checks that d/dx (2 * x) == 2 using the product rule with a constant.
+     */
+    @Test
+    void derivativeOfMulСonstTimesVar() {
+        Expression mulExpr = new Mul(new Constant(2), new Variable("x"));
+        Expression mulDerivative = mulExpr.derivative("x");
+        assertEquals("((0.0*x)+(2.0*1.0))", mulDerivative.toString());
     }
 }

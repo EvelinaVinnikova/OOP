@@ -1,5 +1,9 @@
 package org.example;
 
+
+/**
+ * A simple parser for expressions with +, -, *, / and variables.
+ */
 public class ExpressionParser {
 
     public Expression parse(String str) {
@@ -52,6 +56,9 @@ public class ExpressionParser {
                     case '-': return new Sub(left, right);
                     case '*': return new Mul(left, right);
                     case '/': return new Div(left, right);
+                    default:
+                        throw new IllegalArgumentException(
+                                "Unknown operator: " + sub.charAt(splitIndex));
                 }
             }
         }

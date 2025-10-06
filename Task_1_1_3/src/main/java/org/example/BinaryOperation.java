@@ -1,5 +1,9 @@
 package org.example;
 
+
+/**
+ * Base class for binary expressions with two operands.
+ */
 public abstract class BinaryOperation extends Expression {
 
     protected final Expression left;
@@ -7,6 +11,7 @@ public abstract class BinaryOperation extends Expression {
 
     /**
      * Constructs a binary operation with two sub-expressions.
+     *
      * @param left the left-hand side expression.
      * @param right the right-hand side expression.
      */

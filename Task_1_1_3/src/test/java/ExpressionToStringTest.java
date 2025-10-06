@@ -8,8 +8,15 @@ import org.example.Mul;
 
 import org.junit.jupiter.api.Test;
 
+
+/**
+ * Unit tests verifying correct string representation of expressions.
+ */
 public class ExpressionToStringTest {
 
+    /**
+     * Ensures that 3 + 2*x is represented as "(3.0+(2.0*x))".
+     */
     @Test
     void testExpressionToString() {
         Expression e = new Add(

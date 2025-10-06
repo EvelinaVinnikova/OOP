@@ -1,10 +1,16 @@
 package org.example;
+
 import java.util.Map;
 
+
+/**
+ * Binary addition of two expressions.
+ */
 public class Add extends BinaryOperation {
 
     /**
      * Constructs an addition expression.
+     *
      * @param left the left-hand side expression.
      * @param right the right-hand side expression.
      */

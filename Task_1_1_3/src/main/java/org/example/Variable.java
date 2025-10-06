@@ -1,14 +1,20 @@
 package org.example;
+
 import java.util.Map;
 import java.util.Objects;
 
+
+/**
+ * Represents a variable in an expression.
+ */
 public class Variable extends Expression {
 
     private final String name;
 
     /**
      * Constructs a variable expression.
-     * @param name the name of the variable (e.g., "x").
+     *
+     * @param name the variable name (e.g., {@code "x"}).
      */
     public Variable(String name) {
         this.name = name;
@@ -21,6 +27,7 @@ public class Variable extends Expression {
 
     /**
      * Evaluates the expression by parsing a string...
+     *
      * @return the result of the evaluation.
      * @throws IllegalArgumentException if a variable in the expression is not defined in the string.
      */
