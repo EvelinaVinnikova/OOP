@@ -1,12 +1,18 @@
 package org.example;
+
 import java.util.Map;
 
+
+/**
+ * Numeric literal expression.
+ */
 public class Constant extends Expression {
 
     private final double value;
 
     /**
      * Constructs a number expression.
+     *
      * @param value the constant value.
      */
     public Constant(double value) {

@@ -17,7 +17,7 @@ public class ExpressionDerivativeTest {
      * Checks that d/dx (3 + x) == 1.
      */
     @Test
-    void derivativeOfAddСonstPlusVar() {
+    void derivativeOfAddConstPlusVar() {
         Expression expr = new Add(new Constant(3), new Variable("x"));
         Expression exprDerivative = expr.derivative("x");
         assertEquals("(0.0+1.0)", exprDerivative.toString());
@@ -27,7 +27,7 @@ public class ExpressionDerivativeTest {
      * Checks that d/dx (2 * x) == 2 using the product rule with a constant.
      */
     @Test
-    void derivativeOfMulСonstTimesVar() {
+    void derivativeOfMulConstTimesVar() {
         Expression mulExpr = new Mul(new Constant(2), new Variable("x"));
         Expression mulDerivative = mulExpr.derivative("x");
         assertEquals("((0.0*x)+(2.0*1.0))", mulDerivative.toString());

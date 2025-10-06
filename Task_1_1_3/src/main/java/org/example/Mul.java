@@ -1,10 +1,16 @@
 package org.example;
+
 import java.util.Map;
 
+
+/**
+ * Binary multiplication of two expressions.
+ */
 public class Mul extends BinaryOperation {
 
     /**
      * Constructs a multiplication expression.
+     *
      * @param left the left-hand side expression.
      * @param right the right-hand side expression.
      */

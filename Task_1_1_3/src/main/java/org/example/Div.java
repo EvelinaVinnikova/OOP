@@ -1,6 +1,11 @@
 package org.example;
+
 import java.util.Map;
 
+
+/**
+ * Binary division of two expressions.
+ */
 public class Div extends BinaryOperation {
 
     /**

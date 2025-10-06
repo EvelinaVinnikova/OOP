@@ -4,6 +4,10 @@ import org.example.Expression;
 import org.example.Variable;
 import org.junit.jupiter.api.Test;
 
+
+/**
+ * Tests for evaluation error handling in expressions.
+ */
 public class ExpressionTest {
 
     /**
@@ -12,6 +16,6 @@ public class ExpressionTest {
     @Test
     void testEvalThrowsExceptionForUndefinedVariable() {
         Expression e = new Variable("y");
-        assertThrows(IllegalArgumentException.class, () -> {e.eval("x=10.0");});
+        assertThrows(IllegalArgumentException.class, () -> e.eval("x=10.0"));
     }
 }

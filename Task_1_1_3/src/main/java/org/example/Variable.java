@@ -29,7 +29,7 @@ public class Variable extends Expression {
      * Evaluates the expression by parsing a string...
      *
      * @return the result of the evaluation.
-     * @throws IllegalArgumentException if a variable in the expression is not defined in the string.
+     * @throws IllegalArgumentException if a variable is undefined.
      */
     public double eval(Map<String, Double> variables) {
         Double value = variables.get(this.name);

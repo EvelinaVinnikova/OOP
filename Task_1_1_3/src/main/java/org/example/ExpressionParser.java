@@ -6,6 +6,13 @@ package org.example;
  */
 public class ExpressionParser {
 
+    /**
+     * Parses a string into an {@link Expression}.
+     *
+     * @param str the string to parse
+     * @return parsed expression
+     * @throws IllegalArgumentException if the string cannot be parsed
+     */
     public Expression parse(String str) {
         str = str.trim();
 
@@ -13,6 +20,7 @@ public class ExpressionParser {
             double value = Double.parseDouble(str);
             return new Constant(value);
         } catch (NumberFormatException e) {
+            // ignored: not a numeric constant
         }
 
         if (str.matches("[a-zA-Z]+")) {
