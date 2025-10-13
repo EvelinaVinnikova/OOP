@@ -111,6 +111,24 @@ class FileOperationsTest {
     }
 
     /**
+     * Verifies processing of incorrectly formed edge string,
+     * (string contains only one number).
+     */
+    @Test
+    void testReadFromFileMalformedEdgeLine(@TempDir Path tempDir) throws IOException {
+        Path file = tempDir.resolve("graph.txt");
+        Files.writeString(file, "3\n0 1\n2\n1 2\n");
+
+        Graph graph = new AdjacencyListGraph();
+        graph.readFromFile(file.toString());
+
+        assertEquals(3, graph.getVertexCount());
+        assertTrue(graph.hasEdge(0, 1));
+        assertTrue(graph.hasEdge(1, 2));
+        assertFalse(graph.hasEdge(0, 2));
+    }
+
+    /**
      * Loads a canonical DAG used in topo-sort examples and verifies
      * vertex count and all edges presence.
      */

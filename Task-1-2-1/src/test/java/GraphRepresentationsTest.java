@@ -86,6 +86,34 @@ class GraphRepresentationsTest {
     }
 
     /**
+     * Verifies that equals() returns false while comparing
+     * with null or other-type object.
+     */
+    @Test
+    void testEqualsAgainstNonGraphObjectAndNull() {
+        Graph graph = new AdjacencyMatrixGraph();
+        graph.addVertex(1);
+
+        assertNotEquals("Not a graph", graph);
+        assertNotEquals(null, graph);
+    }
+
+    /**
+     * Checks that graphs with equal number of vertexes and edges are not equal if the
+     * identification of vertexes are different.
+     */
+    @Test
+    void testNotEqualsWithDifferentVertexSets() {
+        Graph graph1 = new AdjacencyListGraph();
+        graph1.addEdge(1, 2);
+
+        Graph graph2 = new AdjacencyMatrixGraph();
+        graph2.addEdge(10, 20);
+
+        assertNotEquals(graph1, graph2);
+    }
+
+    /**
      * Runs a standard “complex” shape across all implementations and asserts
      * equality plus several spot-checks for edges and neighbors.
      */
@@ -131,6 +159,19 @@ class GraphRepresentationsTest {
 
         assertTrue(str.contains("1->2"));
         assertTrue(str.contains("2->3"));
+    }
+
+    /**
+     * Checks that toString() works properly for the empty graph.
+     */
+    @Test
+    void testToStringEmptyGraphContents() {
+        Graph graph = new AdjacencyListGraph();
+        String str = graph.toString();
+
+        assertTrue(str.contains("AdjacencyListGraph"));
+        assertTrue(str.contains("vertices: []"));
+        assertTrue(str.contains("edges: []"));
     }
 
     /**

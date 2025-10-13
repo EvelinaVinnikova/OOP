@@ -83,6 +83,22 @@ class BasicOperationsTest {
     }
 
     /**
+     * Checking that removing the non-existent vertex doesn't change anything:
+     * no exceptions and count is the same.
+     */
+    @Test
+    void testRemoveNonExistentVertex() {
+        Graph graph = new AdjacencyMatrixGraph();
+        graph.addVertex(10);
+        int initialCount = graph.getVertexCount();
+
+        graph.removeVertex(999);
+
+        assertEquals(initialCount, graph.getVertexCount());
+        assertTrue(graph.getVertices().contains(10));
+    }
+
+    /**
      * Confirms that adding an edge creates the directed connection (u -> v),
      * does not create the reverse edge, and auto-creates missing vertices.
      */
@@ -140,6 +156,21 @@ class BasicOperationsTest {
     }
 
     /**
+     * Checks that removing edge from absent vertex doesn't call any exceptions,
+     * and works properly.
+     */
+    @Test
+    void testRemoveEdgeFromAbsentVertex() {
+        Graph graph = new AdjacencyMatrixGraph();
+        graph.addVertex(10);
+
+        graph.removeEdge(999, 10);
+
+        assertFalse(graph.hasEdge(999, 10));
+        assertEquals(1, graph.getVertexCount());
+    }
+
+    /**
      * Ensures that getNeighbors(u) returns exactly the out-neighbors of u
      * for a typical fan-out pattern.
      */
@@ -167,6 +198,20 @@ class BasicOperationsTest {
         Graph graph = new AdjacencyMatrixGraph();
 
         List<Integer> neighbors = graph.getNeighbors(999);
+
+        assertTrue(neighbors.isEmpty());
+    }
+
+    /**
+     * Checks that getNeighbors for isolated (disconnected or non-existent) vertex
+     * returns an empty list.
+     */
+    @Test
+    void testGetNeighborsOfIsolatedVertex() {
+        Graph graph = new AdjacencyMatrixGraph();
+        graph.addVertex(10);
+
+        List<Integer> neighbors = graph.getNeighbors(10);
 
         assertTrue(neighbors.isEmpty());
     }
