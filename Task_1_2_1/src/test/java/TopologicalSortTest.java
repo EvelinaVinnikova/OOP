@@ -184,9 +184,9 @@ class TopologicalSortTest {
     @Test
     void testBothAlgorithmsWorkWithAllRepresentations() {
         Graph[] graphs = new Graph[] {
-                new AdjacencyListGraph(),
-                new AdjacencyMatrixGraph(),
-                new IncidenceMatrixGraph()
+            new AdjacencyListGraph(),
+            new AdjacencyMatrixGraph(),
+            new IncidenceMatrixGraph()
         };
 
         for (Graph graph : graphs) {

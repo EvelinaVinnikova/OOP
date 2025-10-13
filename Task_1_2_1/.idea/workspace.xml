@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="6ebddb43-4278-4209-97e2-999818123330" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/IncidenceMatrixGraph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/IncidenceMatrixGraph.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/TopologicalSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/TopologicalSort.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/GraphRepresentationsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/GraphRepresentationsTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/TopologicalSortTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TopologicalSortTest.java" afterDir="false" />
     </list>
