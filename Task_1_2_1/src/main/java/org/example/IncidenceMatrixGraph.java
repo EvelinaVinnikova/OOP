@@ -193,9 +193,9 @@ public class IncidenceMatrixGraph implements Graph {
     @Override
     public void readFromFile(String filename) throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
-            int vCount = Integer.parseInt(reader.readLine().trim());
+            int vertexCountFromFile = Integer.parseInt(reader.readLine().trim());
 
-            for (int i = 0; i < vCount; i++) {
+            for (int i = 0; i < vertexCountFromFile; i++) {
                 addVertex(i);
             }
 

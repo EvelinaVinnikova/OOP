@@ -21,15 +21,14 @@ class GraphRepresentationsTest {
     @Test
     void testEqualsForDifferentRepresentations() {
         Graph matrix = new AdjacencyMatrixGraph();
-        Graph list = new AdjacencyListGraph();
-        Graph incidence = new IncidenceMatrixGraph();
-
         matrix.addEdge(1, 2);
         matrix.addEdge(2, 3);
 
+        Graph list = new AdjacencyListGraph();
         list.addEdge(1, 2);
         list.addEdge(2, 3);
 
+        Graph incidence = new IncidenceMatrixGraph();
         incidence.addEdge(1, 2);
         incidence.addEdge(2, 3);
 
@@ -45,11 +44,10 @@ class GraphRepresentationsTest {
     @Test
     void testHashCodeConsistency() {
         Graph graph1 = new AdjacencyListGraph();
-        Graph graph2 = new AdjacencyMatrixGraph();
-
         graph1.addEdge(1, 2);
         graph1.addEdge(2, 3);
 
+        Graph graph2 = new AdjacencyMatrixGraph();
         graph2.addEdge(1, 2);
         graph2.addEdge(2, 3);
 
@@ -63,9 +61,9 @@ class GraphRepresentationsTest {
     @Test
     void testNotEqualsWithDifferentEdges() {
         Graph graph1 = new AdjacencyListGraph();
-        Graph graph2 = new AdjacencyMatrixGraph();
-
         graph1.addEdge(1, 2);
+
+        Graph graph2 = new AdjacencyMatrixGraph();
         graph2.addEdge(1, 3);
 
         assertNotEquals(graph1, graph2);
@@ -78,11 +76,10 @@ class GraphRepresentationsTest {
     @Test
     void testNotEqualsWithDifferentVertexCount() {
         Graph graph1 = new AdjacencyListGraph();
-        Graph graph2 = new IncidenceMatrixGraph();
-
         graph1.addVertex(1);
         graph1.addVertex(2);
 
+        Graph graph2 = new IncidenceMatrixGraph();
         graph2.addVertex(1);
 
         assertNotEquals(graph1, graph2);
@@ -94,7 +91,7 @@ class GraphRepresentationsTest {
      */
     @Test
     void testAllRepresentationsWithComplexGraph() {
-        Graph[] graphs = {
+        Graph[] graphs = new Graph[] {
                 new AdjacencyListGraph(),
                 new AdjacencyMatrixGraph(),
                 new IncidenceMatrixGraph()
@@ -156,12 +153,11 @@ class GraphRepresentationsTest {
     @Test
     void testGraphWithOnlyVerticesEqual() {
         Graph graph1 = new AdjacencyListGraph();
-        Graph graph2 = new AdjacencyMatrixGraph();
-
         graph1.addVertex(1);
         graph1.addVertex(2);
         graph1.addVertex(3);
 
+        Graph graph2 = new AdjacencyMatrixGraph();
         graph2.addVertex(1);
         graph2.addVertex(2);
         graph2.addVertex(3);

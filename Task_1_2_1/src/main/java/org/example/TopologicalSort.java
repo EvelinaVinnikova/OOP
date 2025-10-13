@@ -19,14 +19,14 @@ public class TopologicalSort {
      * @return list of vertices in topologically sorted order
      * @throws IllegalArgumentException if graph contains a cycle
      */
-    public static List<Integer> Sort(Graph graph) {
+    public static List<Integer> sort(Graph graph) {
         List<Integer> result = new ArrayList<>();
         Set<Integer> visited = new HashSet<>();
         Set<Integer> recursionStack = new HashSet<>();
 
         for (int vertex : graph.getVertices()) {
             if (!visited.contains(vertex)) {
-                if (!Dfs(graph, vertex, visited, recursionStack, result)) {
+                if (!dfs(graph, vertex, visited, recursionStack, result)) {
                     throw new IllegalArgumentException(
                             "Graph contains a cycle, topological sort is not possible"
                     );
@@ -50,7 +50,7 @@ public class TopologicalSort {
      * @return list of vertices in topologically sorted order
      * @throws IllegalArgumentException if graph contains a cycle
      */
-    public static List<Integer> KahnSort(Graph graph) {
+    public static List<Integer> kahnSort(Graph graph) {
         List<Integer> result = new ArrayList<>();
         Map<Integer, Integer> inDegree = new HashMap<>();
 
@@ -92,14 +92,14 @@ public class TopologicalSort {
         return result;
     }
 
-    private static boolean Dfs(Graph graph, int vertex, Set<Integer> visited,
+    private static boolean dfs(Graph graph, int vertex, Set<Integer> visited,
                                Set<Integer> recursionStack, List<Integer> result) {
         visited.add(vertex);
         recursionStack.add(vertex);
 
         for (int neighbor : graph.getNeighbors(vertex)) {
             if (!visited.contains(neighbor)) {
-                if (!Dfs(graph, neighbor, visited, recursionStack, result)) {
+                if (!dfs(graph, neighbor, visited, recursionStack, result)) {
                     return false;
                 }
             } else if (recursionStack.contains(neighbor)) {

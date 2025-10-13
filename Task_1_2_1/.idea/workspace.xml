@@ -5,17 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6ebddb43-4278-4209-97e2-999818123330" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/shadrina/Sample.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/ru/nsu/shadrina/SampleTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/IncidenceMatrixGraph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/IncidenceMatrixGraph.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/TopologicalSort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/TopologicalSort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/GraphRepresentationsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/GraphRepresentationsTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/TopologicalSortTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/TopologicalSortTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -21,14 +21,14 @@ class TopologicalSortTest {
      * Validates relative order constraints implied by edges.
      */
     @Test
-    void testTopologicalSortDFS() {
+    void testTopologicalSortDfs() {
         Graph graph = new AdjacencyListGraph();
         graph.addEdge(0, 1);
         graph.addEdge(0, 2);
         graph.addEdge(1, 3);
         graph.addEdge(2, 3);
 
-        List<Integer> sorted = TopologicalSort.Sort(graph);
+        List<Integer> sorted = TopologicalSort.sort(graph);
 
         assertEquals(4, sorted.size());
         assertTrue(sorted.indexOf(0) < sorted.indexOf(1));
@@ -48,7 +48,7 @@ class TopologicalSortTest {
         graph.addEdge(3, 1);
 
         assertThrows(IllegalArgumentException.class, () -> {
-            TopologicalSort.Sort(graph);
+            TopologicalSort.sort(graph);
         });
     }
 
@@ -65,7 +65,7 @@ class TopologicalSortTest {
         graph.addEdge(2, 3);
         graph.addEdge(3, 1);
 
-        List<Integer> sorted = TopologicalSort.KahnSort(graph);
+        List<Integer> sorted = TopologicalSort.kahnSort(graph);
 
         assertEquals(6, sorted.size());
         assertTrue(sorted.indexOf(5) < sorted.indexOf(2));
@@ -86,7 +86,7 @@ class TopologicalSortTest {
         graph.addEdge(3, 1);
 
         assertThrows(IllegalArgumentException.class, () -> {
-            TopologicalSort.KahnSort(graph);
+            TopologicalSort.kahnSort(graph);
         });
     }
 
@@ -97,7 +97,7 @@ class TopologicalSortTest {
     void testEmptyGraphTopologicalSort() {
         Graph graph = new AdjacencyListGraph();
 
-        List<Integer> sorted = TopologicalSort.Sort(graph);
+        List<Integer> sorted = TopologicalSort.sort(graph);
 
         assertTrue(sorted.isEmpty());
     }
@@ -109,7 +109,7 @@ class TopologicalSortTest {
     void testEmptyGraphKahnSort() {
         Graph graph = new AdjacencyMatrixGraph();
 
-        List<Integer> sorted = TopologicalSort.KahnSort(graph);
+        List<Integer> sorted = TopologicalSort.kahnSort(graph);
 
         assertTrue(sorted.isEmpty());
     }
@@ -123,7 +123,7 @@ class TopologicalSortTest {
         Graph graph = new AdjacencyMatrixGraph();
         graph.addVertex(42);
 
-        List<Integer> sorted = TopologicalSort.Sort(graph);
+        List<Integer> sorted = TopologicalSort.sort(graph);
 
         assertEquals(1, sorted.size());
         assertEquals(42, sorted.get(0));
@@ -138,7 +138,7 @@ class TopologicalSortTest {
         Graph graph = new IncidenceMatrixGraph();
         graph.addVertex(99);
 
-        List<Integer> sorted = TopologicalSort.KahnSort(graph);
+        List<Integer> sorted = TopologicalSort.kahnSort(graph);
 
         assertEquals(1, sorted.size());
         assertEquals(99, sorted.get(0));
@@ -156,7 +156,7 @@ class TopologicalSortTest {
         graph.addEdge(3, 4);
         graph.addEdge(4, 5);
 
-        List<Integer> sorted = TopologicalSort.Sort(graph);
+        List<Integer> sorted = TopologicalSort.sort(graph);
 
         assertEquals(List.of(1, 2, 3, 4, 5), sorted);
     }
@@ -172,7 +172,7 @@ class TopologicalSortTest {
         graph.addEdge(20, 30);
         graph.addEdge(30, 40);
 
-        List<Integer> sorted = TopologicalSort.KahnSort(graph);
+        List<Integer> sorted = TopologicalSort.kahnSort(graph);
 
         assertEquals(List.of(10, 20, 30, 40), sorted);
     }
@@ -183,7 +183,7 @@ class TopologicalSortTest {
      */
     @Test
     void testBothAlgorithmsWorkWithAllRepresentations() {
-        Graph[] graphs = {
+        Graph[] graphs = new Graph[] {
                 new AdjacencyListGraph(),
                 new AdjacencyMatrixGraph(),
                 new IncidenceMatrixGraph()
@@ -194,14 +194,14 @@ class TopologicalSortTest {
             graph.addEdge(1, 2);
             graph.addEdge(0, 2);
 
-            List<Integer> sortedDFS = TopologicalSort.Sort(graph);
-            List<Integer> sortedKahn = TopologicalSort.KahnSort(graph);
+            List<Integer> sortedDfs = TopologicalSort.sort(graph);
+            List<Integer> sortedKahn = TopologicalSort.kahnSort(graph);
 
-            assertEquals(3, sortedDFS.size());
+            assertEquals(3, sortedDfs.size());
             assertEquals(3, sortedKahn.size());
 
-            assertTrue(sortedDFS.indexOf(0) < sortedDFS.indexOf(1));
-            assertTrue(sortedDFS.indexOf(1) < sortedDFS.indexOf(2));
+            assertTrue(sortedDfs.indexOf(0) < sortedDfs.indexOf(1));
+            assertTrue(sortedDfs.indexOf(1) < sortedDfs.indexOf(2));
 
             assertTrue(sortedKahn.indexOf(0) < sortedKahn.indexOf(1));
             assertTrue(sortedKahn.indexOf(1) < sortedKahn.indexOf(2));
@@ -213,7 +213,7 @@ class TopologicalSortTest {
      * source first, sink last, and both middle nodes before the sink.
      */
     @Test
-    void testComplexDAG() {
+    void testComplexDag() {
         Graph graph = new AdjacencyListGraph();
         // diamond-shaped DAG
         graph.addEdge(1, 2);
@@ -222,7 +222,7 @@ class TopologicalSortTest {
         graph.addEdge(3, 4);
         graph.addEdge(4, 5);
 
-        List<Integer> sorted = TopologicalSort.Sort(graph);
+        List<Integer> sorted = TopologicalSort.sort(graph);
 
         assertEquals(5, sorted.size());
         assertEquals(1, sorted.get(0));
@@ -240,11 +240,11 @@ class TopologicalSortTest {
         graph.addEdge(1, 1);
 
         assertThrows(IllegalArgumentException.class, () -> {
-            TopologicalSort.Sort(graph);
+            TopologicalSort.sort(graph);
         });
 
         assertThrows(IllegalArgumentException.class, () -> {
-            TopologicalSort.KahnSort(graph);
+            TopologicalSort.kahnSort(graph);
         });
     }
 }
