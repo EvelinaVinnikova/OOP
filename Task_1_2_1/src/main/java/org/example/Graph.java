@@ -31,7 +31,7 @@ public interface Graph {
     void addEdge(int from, int to);
 
     /**
-     * Removes an edge from the graph.
+     * Removes the edge from the graph.
      *
      * @param from the source vertex
      * @param to the destination vertex
