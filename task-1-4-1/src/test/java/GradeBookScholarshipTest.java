@@ -1,18 +1,19 @@
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.example.GradeBook;
-import org.example.GradeValue;
-import org.example.Grade;
 import org.example.ControlType;
-
+import org.example.Grade;
+import org.example.GradeValue;
 import org.junit.jupiter.api.Test;
 
 
 class GradeBookScholarshipTest {
 
+
     @Test
-    void canGetIncreasedScholarship_returnsTrue_whenCurrentSemesterHasHighAverageAndNoSatisfactory() {
+    void canGetIncreasedScholarship() {
+        //returns True when Current Semester Has High Average And No Satisfactory
         GradeBook book = new GradeBook();
         book.addGrade(new Grade("Math", ControlType.EXAM, GradeValue.EXCELLENT, 3)); // 5
         book.addGrade(new Grade("Prog", ControlType.EXAM, GradeValue.EXCELLENT, 3)); // 5

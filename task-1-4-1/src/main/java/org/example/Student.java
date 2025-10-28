@@ -10,12 +10,12 @@ package org.example;
 public class Student {
 
     /**
-     * The full name of the student
+     * The full name of the student.
      */
     private final String name;
 
     /**
-     * The student's electronic grade book, which stores all grades, thesis result,
+     * The student's electronic grade book, which stores all grades, thesis result.
      * and enrollment type, and implements academic eligibility logic
      */
     private final GradeBook gradeBook;
@@ -32,7 +32,7 @@ public class Student {
     }
 
     /**
-     * Returns the student's full name
+     * Returns the student's full name.
      *
      * @return the name as a string
      */
@@ -41,7 +41,7 @@ public class Student {
     }
 
     /**
-     * Returns the student's grade book
+     * Returns the student's grade book.
      * The grade book contains all recorded grades and provides methods for academic evaluation
      *
      * @return the grade book instance associated with this student
@@ -64,7 +64,7 @@ public class Student {
 
     /**
      * Checks whether the student is eligible to transfer from fee-paying to state-funded education
-     * Eligibility requires that the student is currently fee-paying and has no "satisfactory" grades
+     * Eligibility requires the student is now fee-paying and has no "satisfactory" grades
      * on exams during the last two semesters. Differentiated tests with "satisfactory" are allowed
      *
      * @return true if transfer is possible, false otherwise
@@ -74,8 +74,8 @@ public class Student {
     }
 
     /**
-     * Checks whether the student currently meets all requirements for a red diploma
-     * Requirements include: an "excellent" grade for the bachelor's thesis, no "satisfactory" grades
+     * Checks whether the student currently meets all requirements for a red diploma.
+     * Requirements include: "excellent" grade for bachelor's thesis, no "satisfactory" grades
      * in any subject, and at least 75% of all grades being "excellent"
      *
      * @return true if the student qualifies for a red diploma, false otherwise

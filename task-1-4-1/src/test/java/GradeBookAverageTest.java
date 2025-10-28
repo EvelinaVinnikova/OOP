@@ -1,10 +1,9 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.example.ControlType;
-import org.example.GradeValue;
-import org.example.GradeBook;
 import org.example.Grade;
-
+import org.example.GradeBook;
+import org.example.GradeValue;
 import org.junit.jupiter.api.Test;
 
 

@@ -15,7 +15,7 @@ public enum GradeValue {
     EXCELLENT("отлично", 5),
 
     /**
-     * Good ("хорошо") — a strong performance
+     * Good ("хорошо") — a strong performance.
      * Numeric value: 4
      * Acceptable for most academic requirements, but not sufficient for red diploma
      */
