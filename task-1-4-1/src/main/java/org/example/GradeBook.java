@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Represents an electronic grade book for a student of the Faculty of Mechanics and Mathematics
+ * Represents an electronic grade book for a student of the Faculty of Mechanics and Mathematics.
  * This class stores all academic grades, manages the student's enrollment type (budget/fee-paying),
  * and provides methods to evaluate eligibility for:
  *   Transfer from fee-paying to budget education
@@ -32,7 +32,8 @@ public class GradeBook {
 
     /**
      * Adds a new grade to the grade book.
-     * The grade is appended to the internal list and will be included in all subsequent calculations.
+     * The grade is appended to the internal list and
+     * will be included in all subsequent calculations.
      *
      * @param grade the grade to add; must not be {@code null}
      * @throws NullPointerException if {@code grade} is {@code null}
@@ -87,7 +88,9 @@ public class GradeBook {
      * @return {@code true} if transfer is possible, {@code false} otherwise
      */
     public boolean canTransferToBudget() {
-        if (isBudget) return true;
+        if (isBudget){
+            return true;
+        }
 
         int lastSemester = grades.stream()
                 .mapToInt(Grade::getSemesterNumber)
@@ -125,7 +128,9 @@ public class GradeBook {
         }
 
         long totalGrades = grades.size();
-        if (totalGrades == 0) return false;
+        if (totalGrades == 0){
+            return false;
+        }
 
         long excellentCount = grades.stream()
                 .filter(g -> g.getGradeValue() == GradeValue.EXCELLENT)
@@ -156,7 +161,9 @@ public class GradeBook {
                 .filter(g -> g.getSemesterNumber() == currentSemester)
                 .toList();
 
-        if (currentSemesterGrades.isEmpty()) return false;
+        if (currentSemesterGrades.isEmpty()){
+            return false;
+        }
 
         if (currentSemesterGrades.stream()
                 .anyMatch(g -> g.getGradeValue() == GradeValue.SATISFACTORY)) {
@@ -172,7 +179,7 @@ public class GradeBook {
     }
 
     /**
-     * Prints all recorded grades to the standard output (for debugging purposes only)
+     * Prints all recorded grades to the standard output (for debugging purposes only).
      */
     public void printAllGrades() {
         grades.forEach(System.out::println);

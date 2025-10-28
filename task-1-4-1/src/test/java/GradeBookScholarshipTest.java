@@ -1,15 +1,14 @@
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.example.GradeBook;
 import org.example.ControlType;
 import org.example.Grade;
+import org.example.GradeBook;
 import org.example.GradeValue;
 import org.junit.jupiter.api.Test;
 
 
 class GradeBookScholarshipTest {
-
 
     @Test
     void canGetIncreasedScholarship() {

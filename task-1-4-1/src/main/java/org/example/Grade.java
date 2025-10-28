@@ -35,17 +35,17 @@ public class Grade {
     /**
      * Constructs a new {@code Grade} instance with the specified attributes.
      *
-     * @param subject         the name of the subject; must not be {@code null}
+     * @param subj         the name of the subject; must not be {@code null}
      * @param controlType     the type of assessment; must not be {@code null}
      * @param gradeValue      the grade received; must not be {@code null}
-     * @param semesterNumber  the semester number (positive integer)
-     * @throws NullPointerException if {@code subject}, {@code controlType}, or {@code gradeValue} is {@code null}
+     * @param semesterNum  the semester number (positive integer)
+     * @throws NullPointerException if any of subject, controlType, or gradeValue is null
      */
-    public Grade(String subject, ControlType controlType, GradeValue gradeValue, int semesterNumber) {
-        this.subject = subject;
+    public Grade(String subj, ControlType controlType, GradeValue gradeValue, int semesterNum) {
+        this.subject = subj;
         this.controlType = controlType;
         this.gradeValue = gradeValue;
-        this.semesterNumber = semesterNumber;
+        this.semesterNumber = semesterNum;
     }
 
     /**
@@ -93,13 +93,17 @@ public class Grade {
      */
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o){
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()){
+            return false;
+        }
         Grade grade = (Grade) o;
-        return semesterNumber == grade.semesterNumber &&
-                Objects.equals(subject, grade.subject) &&
-                controlType == grade.controlType &&
-                gradeValue == grade.gradeValue;
+        return semesterNumber == grade.semesterNumber
+                && Objects.equals(subject, grade.subject)
+                && controlType == grade.controlType
+                && gradeValue == grade.gradeValue;
     }
 
     /**
@@ -119,11 +123,11 @@ public class Grade {
      */
     @Override
     public String toString() {
-        return "Grade{" +
-                "subject='" + subject + '\'' +
-                ", controlType=" + controlType +
-                ", gradeValue=" + gradeValue +
-                ", semesterNumber=" + semesterNumber +
-                '}';
+        return "Grade{"
+                + "subject='" + subject + '\''
+                + ", controlType=" + controlType
+                + ", gradeValue=" + gradeValue
+                + ", semesterNumber=" + semesterNumber
+                + '}';
     }
 }
