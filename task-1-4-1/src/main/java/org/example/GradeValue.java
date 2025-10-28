@@ -8,7 +8,7 @@ package org.example;
 public enum GradeValue {
 
     /**
-     * Excellent ("отлично") — the highest possible grade
+     * Excellent ("отлично") — the highest possible grade.
      * Numeric value: 5.
      * Required for red diploma eligibility and high scholarship consideration
      */
@@ -47,7 +47,7 @@ public enum GradeValue {
     private final int numericValue;
 
     /**
-     * Constructs a grade value with its display name and numeric representation
+     * Constructs a grade value with its display name and numeric representation.
      *
      * @param name          the Russian textual name of the grade
      * @param numericValue  the integer value used in GPA and average computations

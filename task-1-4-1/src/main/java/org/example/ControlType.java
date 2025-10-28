@@ -10,10 +10,10 @@ package org.example;
 public enum ControlType {
 
     /**
-     * Final examination — a formal assessment typically held at the end of a course,
+     * Final examination — a formal assessment typically held at the end of a course
      * graded on a scale (e.g., "satisfactory", "good", "excellent").
      * Exam grades are strictly evaluated when checking eligibility for transfer
-     * to state-funded (budget) education and for an honors diploma.
+     * to state-funded (budget) education and for a red diploma.
      */
     EXAM("Exam"),
 
@@ -22,7 +22,7 @@ public enum ControlType {
      * (unlike a pass/fail test). While it uses the same grading scale as exams,
      * a "satisfactory" grade here is permitted when evaluating budget transfer eligibility.
      */
-    DIFFERENTIATED_TEST("Differentiated test"),
+    DIFF_TEST("Differentiated test"),
 
     /**
      * Pass/fail test — a non-graded assessment where the outcome is typically

@@ -88,7 +88,7 @@ public class GradeBook {
      * @return {@code true} if transfer is possible, {@code false} otherwise
      */
     public boolean canTransferToBudget() {
-        if (isBudget){
+        if (isBudget) {
             return true;
         }
 
@@ -128,7 +128,7 @@ public class GradeBook {
         }
 
         long totalGrades = grades.size();
-        if (totalGrades == 0){
+        if (totalGrades == 0) {
             return false;
         }
 
@@ -161,7 +161,7 @@ public class GradeBook {
                 .filter(g -> g.getSemesterNumber() == currentSemester)
                 .toList();
 
-        if (currentSemesterGrades.isEmpty()){
+        if (currentSemesterGrades.isEmpty()) {
             return false;
         }
 

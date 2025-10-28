@@ -15,7 +15,7 @@ class GradeBookBudgetTransferTest {
         GradeBook book = new GradeBook();
         book.addGrade(new Grade("Algebra", ControlType.EXAM, GradeValue.GOOD, 3));
         book.addGrade(new Grade("Analysis", ControlType.EXAM, GradeValue.EXCELLENT, 4));
-        book.addGrade(new Grade("PE", ControlType.DIFFERENTIATED_TEST, GradeValue.SATISFACTORY, 4)); // разрешено
+        book.addGrade(new Grade("PE", ControlType.DIFF_TEST, GradeValue.SATISFACTORY, 4));
 
         assertTrue(book.canTransferToBudget());
     }
