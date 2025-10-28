@@ -1,5 +1,6 @@
 package org.example;
 
+
 /**
  * Represents a student enrolled at the Faculty of Mechanics and Mathematics.
  * Each student has a name and an electronic grade book that records all academic performance
