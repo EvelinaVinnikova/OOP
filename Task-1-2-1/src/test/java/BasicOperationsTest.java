@@ -3,230 +3,107 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.example.Graph;
-import org.example.AdjacencyListGraph;
-import org.example.AdjacencyMatrixGraph;
-import org.example.IncidenceMatrixGraph;
 
 import org.junit.jupiter.api.Test;
-import java.util.List;
 
-/**
- * Tests for basic graph operations: add/remove vertices and edges.
- */
-class BasicOperationsTest {
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 
-    /**
-     * Verifies that adding distinct vertices increases the vertex count
-     * and that the vertices collection contains each newly added vertex.
-     */
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Set;
+import java.util.HashSet;
+
+
+abstract class BasicOperationsTest {
+
+    protected abstract Graph createGraph();
+
     @Test
-    void testAddVertex() {
-        Graph graph = new AdjacencyListGraph();
-        graph.addVertex(1);
-        graph.addVertex(2);
-
-        assertEquals(2, graph.getVertexCount());
-        assertTrue(graph.getVertices().contains(1));
-        assertTrue(graph.getVertices().contains(2));
+    void addVertex_idempotent() {
+        Graph g = createGraph();
+        g.addVertex(1);
+        g.addVertex(1);
+        assertEquals(1, g.getVertexCount());
+        assertTrue(g.getVertices().contains(1));
     }
 
-    /**
-     * Ensures that adding the same vertex twice does not create duplicates
-     * and the vertex count remains correct.
-     */
     @Test
-    void testAddDuplicateVertex() {
-        Graph graph = new AdjacencyMatrixGraph();
-        graph.addVertex(1);
-        graph.addVertex(1);
-
-        assertEquals(1, graph.getVertexCount());
+    void addEdge_autoAddsVertices() {
+        Graph g = createGraph();
+        g.addEdge(10, 20);
+        assertTrue(g.hasEdge(10, 20));
+        assertTrue(g.getVertices().containsAll(Arrays.asList(10, 20)));
     }
 
-    /**
-     * Checks that removing a vertex also removes all incident edges
-     * and updates the vertex set accordingly.
-     */
     @Test
-    void testRemoveVertex() {
-        Graph graph = new IncidenceMatrixGraph();
-        graph.addVertex(1);
-        graph.addVertex(2);
-        graph.addEdge(1, 2);
-
-        graph.removeVertex(1);
-
-        assertEquals(1, graph.getVertexCount());
-        assertFalse(graph.getVertices().contains(1));
-        assertFalse(graph.hasEdge(1, 2));
+    void removeEdge_onlyThatEdgeRemoved() {
+        Graph g = createGraph();
+        g.addEdge(1, 2);
+        g.addEdge(1, 3);
+        g.removeEdge(1, 2);
+        assertFalse(g.hasEdge(1, 2));
+        assertTrue(g.hasEdge(1, 3));
+        assertTrue(g.getVertices().containsAll(Arrays.asList(1, 2, 3)));
     }
 
-    /**
-     * Validates that removing a vertex with multiple incident edges
-     * eliminates all related edges while preserving unrelated ones.
-     */
     @Test
-    void testRemoveVertexWithMultipleEdges() {
-        Graph graph = new AdjacencyListGraph();
-        graph.addEdge(1, 2);
-        graph.addEdge(1, 3);
-        graph.addEdge(2, 3);
-        graph.addEdge(3, 1);
-
-        graph.removeVertex(1);
-
-        assertEquals(2, graph.getVertexCount());
-        assertFalse(graph.hasEdge(1, 2));
-        assertFalse(graph.hasEdge(1, 3));
-        assertFalse(graph.hasEdge(3, 1));
-        assertTrue(graph.hasEdge(2, 3));
+    void removeVertex_removesIncidentEdges() {
+        Graph g = createGraph();
+        g.addEdge(1, 2);
+        g.addEdge(2, 3);
+        g.addEdge(1, 3);
+        g.removeVertex(2);
+        assertFalse(g.hasEdge(1, 2));
+        assertFalse(g.hasEdge(2, 3));
+        assertTrue(g.hasEdge(1, 3));
+        assertFalse(g.getVertices().contains(2));
     }
 
-    /**
-     * Checking that removing the non-existent vertex doesn't change anything:
-     * no exceptions and count is the same.
-     */
     @Test
-    void testRemoveNonExistentVertex() {
-        Graph graph = new AdjacencyMatrixGraph();
-        graph.addVertex(10);
-        int initialCount = graph.getVertexCount();
+    void neighbors_returnsOutgoingOnly() {
+        Graph g = createGraph();
+        g.addEdge(5, 6);
+        g.addEdge(5, 7);
+        g.addEdge(6, 7);
 
-        graph.removeVertex(999);
-
-        assertEquals(initialCount, graph.getVertexCount());
-        assertTrue(graph.getVertices().contains(10));
+        Set<Integer> expected = new HashSet<>(Arrays.asList(6, 7));
+        assertEquals(expected, new HashSet<>(g.getNeighbors(5)));
+        assertEquals(Collections.singleton(7), new HashSet<>(g.getNeighbors(6)));
+        assertEquals(Collections.emptySet(), new HashSet<>(g.getNeighbors(7)));
     }
 
-    /**
-     * Confirms that adding an edge creates the directed connection (u -> v),
-     * does not create the reverse edge, and auto-creates missing vertices.
-     */
     @Test
-    void testAddEdge() {
-        Graph graph = new AdjacencyListGraph();
-        graph.addEdge(1, 2);
-
-        assertTrue(graph.hasEdge(1, 2));
-        assertFalse(graph.hasEdge(2, 1));
-        assertEquals(2, graph.getVertexCount());
+    void equalsAndHashCode_sameStructure_sameImpl() {
+        Graph a = createGraph();
+        Graph b = createGraph();
+        a.addEdge(0, 1);
+        a.addEdge(1, 2);
+        b.addEdge(0, 1);
+        b.addEdge(1, 2);
+        assertEquals(a, b);
+        assertEquals(a.hashCode(), b.hashCode());
     }
 
-    /**
-     * Ensures that calling addEdge(u, v) on non-existent vertices
-     * implicitly creates those vertices in the graph.
-     */
     @Test
-    void testAddEdgeCreatesVertices() {
-        Graph graph = new AdjacencyMatrixGraph();
-        graph.addEdge(5, 10);
+    void readFromFile_parsesFixedFormat() throws Exception {
+        File f = File.createTempFile("graph", ".txt");
+        f.deleteOnExit();
+        try (PrintWriter w = new PrintWriter(new FileWriter(f))) {
+            w.println("4");
+            w.println("0 1");
+            w.println("1 2");
+            w.println("2 3");
+        }
 
-        assertTrue(graph.getVertices().contains(5));
-        assertTrue(graph.getVertices().contains(10));
-        assertTrue(graph.hasEdge(5, 10));
-    }
+        Graph g = createGraph();
+        g.readFromFile(f.getAbsolutePath());
 
-    /**
-     * Verifies that removing an existing edge deletes only that edge,
-     * leaving the involved vertices untouched.
-     */
-    @Test
-    void testRemoveEdge() {
-        Graph graph = new AdjacencyMatrixGraph();
-        graph.addEdge(1, 2);
-        graph.removeEdge(1, 2);
-
-        assertFalse(graph.hasEdge(1, 2));
-        assertEquals(2, graph.getVertexCount());
-    }
-
-    /**
-     * Checks that removing a non-existent edge is a no-op and does not
-     * throw or alter the graph state unexpectedly.
-     */
-    @Test
-    void testRemoveNonExistentEdge() {
-        Graph graph = new IncidenceMatrixGraph();
-        graph.addVertex(1);
-        graph.addVertex(2);
-
-        graph.removeEdge(1, 2);
-
-        assertFalse(graph.hasEdge(1, 2));
-    }
-
-    /**
-     * Checks that removing edge from absent vertex doesn't call any exceptions,
-     * and works properly.
-     */
-    @Test
-    void testRemoveEdgeFromAbsentVertex() {
-        Graph graph = new AdjacencyMatrixGraph();
-        graph.addVertex(10);
-
-        graph.removeEdge(999, 10);
-
-        assertFalse(graph.hasEdge(999, 10));
-        assertEquals(1, graph.getVertexCount());
-    }
-
-    /**
-     * Ensures that getNeighbors(u) returns exactly the out-neighbors of u
-     * for a typical fan-out pattern.
-     */
-    @Test
-    void testGetNeighbors() {
-        Graph graph = new AdjacencyListGraph();
-        graph.addEdge(1, 2);
-        graph.addEdge(1, 3);
-        graph.addEdge(1, 4);
-
-        List<Integer> neighbors = graph.getNeighbors(1);
-
-        assertEquals(3, neighbors.size());
-        assertTrue(neighbors.contains(2));
-        assertTrue(neighbors.contains(3));
-        assertTrue(neighbors.contains(4));
-    }
-
-    /**
-     * Verifies that requesting neighbors of an absent vertex
-     * yields an empty list.
-     */
-    @Test
-    void testGetNeighborsOfNonExistentVertex() {
-        Graph graph = new AdjacencyMatrixGraph();
-
-        List<Integer> neighbors = graph.getNeighbors(999);
-
-        assertTrue(neighbors.isEmpty());
-    }
-
-    /**
-     * Checks that getNeighbors for isolated (disconnected or non-existent) vertex
-     * returns an empty list.
-     */
-    @Test
-    void testGetNeighborsOfIsolatedVertex() {
-        Graph graph = new AdjacencyMatrixGraph();
-        graph.addVertex(10);
-
-        List<Integer> neighbors = graph.getNeighbors(10);
-
-        assertTrue(neighbors.isEmpty());
-    }
-
-    /**
-     * Confirms that self-loops (u -> u) are allowed and
-     * appear among the vertex's neighbors.
-     */
-    @Test
-    void testSelfLoop() {
-        Graph graph = new AdjacencyListGraph();
-        graph.addEdge(1, 1);
-
-        assertTrue(graph.hasEdge(1, 1));
-        List<Integer> neighbors = graph.getNeighbors(1);
-        assertTrue(neighbors.contains(1));
+        assertTrue(g.getVertices().containsAll(Arrays.asList(0, 1, 2, 3)));
+        assertTrue(g.hasEdge(0, 1));
+        assertTrue(g.hasEdge(1, 2));
+        assertTrue(g.hasEdge(2, 3));
+        assertFalse(g.hasEdge(0, 3));
     }
 }

@@ -24,10 +24,19 @@ public class IncidenceMatrixGraph implements Graph {
     private int vertexCapacity;
     private int edgeCapacity;
 
+    /**
+     * Internal representation of a directed edge.
+     */
     private static class Edge {
         int from;
         int to;
 
+        /**
+         * Constructs a directed edge from {@code from} to {@code to}.
+         *
+         * @param from the source vertex
+         * @param to the destination vertex
+         */
         Edge(int from, int to) {
             this.from = from;
             this.to = to;
@@ -49,7 +58,7 @@ public class IncidenceMatrixGraph implements Graph {
     }
 
     /**
-     * Creates a new incidence matrix graph with default capacity.
+     * Creates a new graph using incidence matrix representation with initial capacity for 10 vertices and 10 edges.
      */
     public IncidenceMatrixGraph() {
         this.vertexCapacity = 10;
@@ -67,11 +76,9 @@ public class IncidenceMatrixGraph implements Graph {
         if (vertexToIndex.containsKey(vertex)) {
             return;
         }
-
         if (vertexCount >= vertexCapacity) {
             resizeVertices();
         }
-
         vertexToIndex.put(vertex, vertexCount);
         indexToVertex.put(vertexCount, vertex);
         vertexCount++;
@@ -83,7 +90,6 @@ public class IncidenceMatrixGraph implements Graph {
             return;
         }
 
-        // Remove all edges connected to this vertex
         List<Edge> toRemove = new ArrayList<>();
         for (Edge edge : edges) {
             if (edge.from == vertex || edge.to == vertex) {
@@ -96,23 +102,11 @@ public class IncidenceMatrixGraph implements Graph {
 
         int index = vertexToIndex.get(vertex);
 
-        // Move last vertex to this position
         if (index < vertexCount - 1) {
             int lastVertex = indexToVertex.get(vertexCount - 1);
 
-            // Copy edges from last row
             for (int i = 0; i < edgeCount; i++) {
                 matrix[index][i] = matrix[vertexCount - 1][i];
-            }
-
-            // Update vertex references in edges
-            for (Edge edge : edges) {
-                if (edge.from == lastVertex) {
-                    edge.from = lastVertex;
-                }
-                if (edge.to == lastVertex) {
-                    edge.to = lastVertex;
-                }
             }
 
             vertexToIndex.put(lastVertex, index);
@@ -151,14 +145,12 @@ public class IncidenceMatrixGraph implements Graph {
     public void removeEdge(int from, int to) {
         Edge edgeToRemove = new Edge(from, to);
         int edgeIndex = edges.indexOf(edgeToRemove);
-
         if (edgeIndex == -1) {
             return;
         }
 
         if (edgeIndex < edgeCount - 1) {
             edges.set(edgeIndex, edges.get(edgeCount - 1));
-
             for (int i = 0; i < vertexCount; i++) {
                 matrix[i][edgeIndex] = matrix[i][edgeCount - 1];
                 matrix[i][edgeCount - 1] = 0;
@@ -176,17 +168,14 @@ public class IncidenceMatrixGraph implements Graph {
     @Override
     public List<Integer> getNeighbors(int vertex) {
         List<Integer> neighbors = new ArrayList<>();
-
         if (!vertexToIndex.containsKey(vertex)) {
             return neighbors;
         }
-
         for (Edge edge : edges) {
             if (edge.from == vertex) {
                 neighbors.add(edge.to);
             }
         }
-
         return neighbors;
     }
 
@@ -194,11 +183,9 @@ public class IncidenceMatrixGraph implements Graph {
     public void readFromFile(String filename) throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             int vertexCountFromFile = Integer.parseInt(reader.readLine().trim());
-
             for (int i = 0; i < vertexCountFromFile; i++) {
                 addVertex(i);
             }
-
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.trim().split("\\s+");
@@ -226,60 +213,52 @@ public class IncidenceMatrixGraph implements Graph {
         return vertexCount;
     }
 
+    /**
+     * Resizes the internal matrix to accommodate more vertices.
+     * Doubles the current vertex capacity and copies existing data.
+     */
     private void resizeVertices() {
         int newCapacity = vertexCapacity * 2;
         int[][] newMatrix = new int[newCapacity][edgeCapacity];
-
         for (int i = 0; i < vertexCount; i++) {
             System.arraycopy(matrix[i], 0, newMatrix[i], 0, edgeCount);
         }
-
         matrix = newMatrix;
         vertexCapacity = newCapacity;
     }
 
+    /**
+     * Resizes the internal matrix to accommodate more edges.
+     * Doubles the current edge capacity and copies existing data.
+     */
     private void resizeEdges() {
         int newCapacity = edgeCapacity * 2;
         int[][] newMatrix = new int[vertexCapacity][newCapacity];
-
         for (int i = 0; i < vertexCount; i++) {
             System.arraycopy(matrix[i], 0, newMatrix[i], 0, edgeCount);
         }
-
         matrix = newMatrix;
         edgeCapacity = newCapacity;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (!(obj instanceof Graph)) {
-            return false;
-        }
+        if (this == obj) return true;
+        if (!(obj instanceof Graph)) return false;
 
         Graph other = (Graph) obj;
-
-        if (this.getVertexCount() != other.getVertexCount()) {
-            return false;
-        }
+        if (this.getVertexCount() != other.getVertexCount()) return false;
 
         List<Integer> vertices = this.getVertices();
         for (int v : vertices) {
-            if (!other.getVertices().contains(v)) {
-                return false;
-            }
+            if (!other.getVertices().contains(v)) return false;
         }
 
         for (int from : vertices) {
             for (int to : vertices) {
-                if (this.hasEdge(from, to) != other.hasEdge(from, to)) {
-                    return false;
-                }
+                if (this.hasEdge(from, to) != other.hasEdge(from, to)) return false;
             }
         }
-
         return true;
     }
 
@@ -288,7 +267,6 @@ public class IncidenceMatrixGraph implements Graph {
         int hash = Objects.hash(vertexCount);
         List<Integer> vertices = new ArrayList<>(vertexToIndex.keySet());
         vertices.sort(Integer::compareTo);
-
         for (int from : vertices) {
             for (int to : vertices) {
                 if (hasEdge(from, to)) {
@@ -296,7 +274,6 @@ public class IncidenceMatrixGraph implements Graph {
                 }
             }
         }
-
         return hash;
     }
 
@@ -305,16 +282,12 @@ public class IncidenceMatrixGraph implements Graph {
         StringBuilder sb = new StringBuilder("IncidenceMatrixGraph{\n");
         sb.append("  vertices: ").append(getVertices()).append("\n");
         sb.append("  edges: [");
-
         boolean first = true;
         for (Edge edge : edges) {
-            if (!first) {
-                sb.append(", ");
-            }
+            if (!first) sb.append(", ");
             sb.append(edge.from).append("->").append(edge.to);
             first = false;
         }
-
         sb.append("]\n}");
         return sb.toString();
     }

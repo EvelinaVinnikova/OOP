@@ -4,76 +4,97 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.HashMap;
 import java.util.Objects;
-import java.util.Set;
 
-/**
- * Graph implementation using adjacency list.
- * Each vertex maps to a set of its neighbors.
- */
 public class AdjacencyMatrixGraph implements Graph {
-    private final Map<Integer, Set<Integer>> adjacencyList;
+    private final Map<Integer, Integer> indexOf = new HashMap<>();
+    private final List<Integer> verticesByIndex = new ArrayList<>();
+    private boolean[][] m = new boolean[0][0];
 
-    /**
-     * Creates a new adjacency list graph.
-     */
-    public AdjacencyMatrixGraph() {
-        this.adjacencyList = new HashMap<>();
-    }
+    public AdjacencyMatrixGraph() { }
 
     @Override
     public void addVertex(int vertex) {
-        adjacencyList.putIfAbsent(vertex, new HashSet<>());
+        if (indexOf.containsKey(vertex)) return;
+
+        int newSize = verticesByIndex.size() + 1;
+        boolean[][] next = new boolean[newSize][newSize];
+
+        for (int i = 0; i < m.length; i++) {
+            System.arraycopy(m[i], 0, next[i], 0, m.length);
+        }
+        m = next;
+
+        int idx = verticesByIndex.size();
+        verticesByIndex.add(vertex);
+        indexOf.put(vertex, idx);
     }
 
     @Override
     public void removeVertex(int vertex) {
-        if (!adjacencyList.containsKey(vertex)) {
-            return;
+        Integer idxObj = indexOf.get(vertex);
+        if (idxObj == null) return;
+        int idx = idxObj;
+
+        int n = verticesByIndex.size();
+        boolean[][] next = new boolean[n - 1][n - 1];
+
+        for (int i = 0, ii = 0; i < n; i++) {
+            if (i == idx) continue;
+            for (int j = 0, jj = 0; j < n; j++) {
+                if (j == idx) continue;
+                next[ii][jj] = m[i][j];
+                jj++;
+            }
+            ii++;
         }
 
-        for (Set<Integer> neighbors : adjacencyList.values()) {
-            neighbors.remove(vertex);
+        m = next;
+        verticesByIndex.remove(idx);
+        indexOf.clear();
+        for (int i = 0; i < verticesByIndex.size(); i++) {
+            indexOf.put(verticesByIndex.get(i), i);
         }
-
-        adjacencyList.remove(vertex);
     }
 
     @Override
     public void addEdge(int from, int to) {
         addVertex(from);
         addVertex(to);
-        adjacencyList.get(from).add(to);
+        m[indexOf.get(from)][indexOf.get(to)] = true;
     }
 
     @Override
     public void removeEdge(int from, int to) {
-        if (adjacencyList.containsKey(from)) {
-            adjacencyList.get(from).remove(to);
-        }
+        Integer i = indexOf.get(from);
+        Integer j = indexOf.get(to);
+        if (i == null || j == null) return;
+        m[i][j] = false;
     }
 
     @Override
     public List<Integer> getNeighbors(int vertex) {
-        if (!adjacencyList.containsKey(vertex)) {
-            return new ArrayList<>();
+        Integer i = indexOf.get(vertex);
+        if (i == null) return new ArrayList<>();
+        List<Integer> res = new ArrayList<>();
+        for (int j = 0; j < m.length; j++) {
+            if (m[i][j]) res.add(verticesByIndex.get(j));
         }
-        return new ArrayList<>(adjacencyList.get(vertex));
+        return res;
     }
 
     @Override
     public void readFromFile(String filename) throws IOException {
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
-            int vertexCount = Integer.parseInt(reader.readLine().trim());
-
+            String first = reader.readLine();
+            if (first == null) return;
+            int vertexCount = Integer.parseInt(first.trim());
             for (int i = 0; i < vertexCount; i++) {
                 addVertex(i);
             }
-
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.trim().split("\\s+");
@@ -88,20 +109,20 @@ public class AdjacencyMatrixGraph implements Graph {
 
     @Override
     public List<Integer> getVertices() {
-        return new ArrayList<>(adjacencyList.keySet());
+        return new ArrayList<>(verticesByIndex);
     }
 
     @Override
     public boolean hasEdge(int from, int to) {
-        if (!adjacencyList.containsKey(from)) {
-            return false;
-        }
-        return adjacencyList.get(from).contains(to);
+        Integer i = indexOf.get(from);
+        Integer j = indexOf.get(to);
+        if (i == null || j == null) return false;
+        return m[i][j];
     }
 
     @Override
     public int getVertexCount() {
-        return adjacencyList.size();
+        return verticesByIndex.size();
     }
 
     @Override
@@ -139,40 +160,39 @@ public class AdjacencyMatrixGraph implements Graph {
 
     @Override
     public int hashCode() {
-        int hash = Objects.hash(adjacencyList.size());
-        List<Integer> vertices = new ArrayList<>(adjacencyList.keySet());
-        vertices.sort(Integer::compareTo);
+        int hash = Objects.hash(verticesByIndex.size());
+        List<Integer> vs = new ArrayList<>(verticesByIndex);
+        vs.sort(Integer::compareTo);
 
-        for (int from : vertices) {
-            for (int to : vertices) {
+        for (int from : vs) {
+            for (int to : vs) {
                 if (hasEdge(from, to)) {
                     hash = 31 * hash + Objects.hash(from, to);
                 }
             }
         }
-
         return hash;
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder("AdjacencyListGraph{\n");
+        StringBuilder sb = new StringBuilder("AdjacencyMatrixGraph{\n");
         sb.append("  vertices: ").append(getVertices()).append("\n");
         sb.append("  edges: [");
 
         boolean first = true;
-        List<Integer> vertices = new ArrayList<>(adjacencyList.keySet());
-        vertices.sort(Integer::compareTo);
+        List<Integer> vs = new ArrayList<>(verticesByIndex);
+        vs.sort(Integer::compareTo);
 
-        for (int from : vertices) {
-            List<Integer> neighbors = new ArrayList<>(adjacencyList.get(from));
-            neighbors.sort(Integer::compareTo);
-            for (int to : neighbors) {
-                if (!first) {
-                    sb.append(", ");
+        for (int from : vs) {
+            for (int to : vs) {
+                if (hasEdge(from, to)) {
+                    if (!first) {
+                        sb.append(", ");
+                    }
+                    sb.append(from).append("->").append(to);
+                    first = false;
                 }
-                sb.append(from).append("->").append(to);
-                first = false;
             }
         }
 
